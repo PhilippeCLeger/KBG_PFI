@@ -1,21 +1,68 @@
 class LoginDialog{
-    constructor (form, emailInput, passwordInput, sendButton, AccountsAPI){
-        this.form = form;
+    constructor (dlg, emailInput, passwordInput, AccountsAPI){
+        this.dlg = dlg;
         this.emailInput = emailInput;
         this.passwordInput = passwordInput;
-        this.sendButton = sendButton;
-        this.API = API;
+        this.API = AccountsAPI;
+        this.__initialize_dialog();
+    }
 
-        this.sendButton.click((e) => {
-            e.preventDefault();
-            this.login();
-        })
+    __initialize_dialog(){
+        this.dlg.dialog({
+            title: "Connexion",
+            autoOpen: false,
+            modal: true,
+            show: {effect: 'fade', speed: 400},
+            hide: {effect: 'fade', speed: 400},
+            width: 500, minWidth: 500, maxWidth: 500,
+            height: 230, minHeight: 230, maxHeight: 230,
+            position: {},
+            buttons: [
+                {
+                    text: "Envoyer",
+                    click: (e) => {
+                        e.preventDefault();
+                        this.login();
+                    }
+                },
+                {
+                    text: "Annuler",
+                    click: () => {
+                        this.hide();
+                    }
+                }
+            ]
+        });
     }
 
 
     login(){
         let email = this.emailInput.val();
         let password = this.passwordInput.val();
-        this.API.login(email, password, () => console.log("success"), () => console.log("error"))
+        const successLoginCallback = (data) => {
+            console.log("success:");
+            console.log(data);
+            this.hide();
+        };
+
+        const errorLoginCallback = (error) => {
+            console.log("error");
+            console.log(error);
+        };
+
+        this.API.login(email, password, successLoginCallback, errorLoginCallback);
+    }
+
+    show(){
+        this.dlg.dialog('open');
+    }
+
+    hide(){
+        this.dlg.dialog('close');
+    }
+
+    empty(){
+        this.emailInput.val("");
+        this.passwordInput.val("");
     }
 }

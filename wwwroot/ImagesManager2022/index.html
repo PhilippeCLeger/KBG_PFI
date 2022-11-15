@@ -68,11 +68,8 @@
             </div>
             <div>
                 <div id="loginDlg">
-                    <form id="loginForm">
-                        <input type="text" name="" id="email_input">
-                        <input type="password" name="" id="password_input">
-                        <button type="submit" id="btnLogin"></button>
-                    </form>
+                    <input type="text" name="" id="email_input" placeholder="Courriel">
+                    <input type="password" name="" id="password_input" placeholder="Mot de passe">
                 </div>
                 <div id="imageDlg">
                     <form id="imageForm">
@@ -108,6 +105,7 @@
         <script src="js/imageUploader.js"></script>
         <script src="js/api.js"></script>
         <script src="js/date.js"></script>
+        
         <script defer>
             const periodicRefreshPeriod = 15;
             let holdCheckETag = false;
@@ -397,6 +395,9 @@
             }
         </script>
 
+        <script src="js/AccountsAPI.js"></script>
+        <script src="js/login.js"></script>
+        <script defer src="js/index.js"></script>
     </body>
 
 </html>
