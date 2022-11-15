@@ -18,7 +18,7 @@ class AccountsAPI{
 
     logout(userId, token, successCallBack, errorCallBack){
         $.ajax({
-            url: this.baseURL & "/accounts/logout/" & userId,
+            url: this.baseURL + "/accounts/logout/" + userId,
             type: 'GET',
             contentType: 'application/json',
             Authorization: processToken(token),
