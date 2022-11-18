@@ -1,11 +1,12 @@
 class LoginDialog{
-    constructor (dlg, emailInput, passwordInput, rememberMeInput, AccountsAPI, userData){
+    constructor (dlg, emailInput, passwordInput, rememberMeInput, AccountsAPI, userData, onLoginSuccess = () => {}){
         this.dlg = dlg;
         this.emailInput = emailInput;
         this.passwordInput = passwordInput;
         this.rememberMeInput = rememberMeInput;
         this.API = AccountsAPI;
         this.UserData = userData;
+        this.onLoginSuccess = onLoginSuccess;
         this.__initialize_dialog();
     }
 
@@ -46,13 +47,18 @@ class LoginDialog{
             console.log(data);
             this.UserData.Access_token = data.Access_token;
             this.UserData.UserId = data.UserId;
-            if (this.rememberMeInput.val()){
+            console.log(this.rememberMeInput.prop("checked"));
+            if (this.rememberMeInput.prop("checked")){
                 this.UserData.email = this.emailInput.val();
                 this.UserData.password = this.passwordInput.val();
                 this.UserData.rememberMe = true;
                 this.UserData.saveToLocalStorage();
-            } else this.UserData.removeLocalStorage();
+            } else {
+                this.UserData.removeLocalStorage();
+                this.UserData.loadLocalStorage();
+            }
             this.hide();
+            this.onLoginSuccess();
         };
 
         const errorLoginCallback = (error) => {
@@ -67,7 +73,7 @@ class LoginDialog{
         if(this.UserData.rememberMe){
             this.emailInput.val(this.UserData.email);
             this.passwordInput.val(this.UserData.password);
-            this.rememberMeInput.val(true);
+            this.rememberMeInput.prop("checked", true);
         } else this.empty();
         this.dlg.dialog('open');
     }
@@ -79,6 +85,6 @@ class LoginDialog{
     empty(){
         this.emailInput.val("");
         this.passwordInput.val("");
-        this.rememberMeInput.val(false);
+        this.rememberMeInput.prop("checked");
     }
 }

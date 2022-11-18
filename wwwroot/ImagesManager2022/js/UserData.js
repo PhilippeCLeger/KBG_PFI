@@ -16,7 +16,7 @@ class UserData{
         const rememberMe = window.localStorage.getItem("appRememberMe");
         this.email = email ? email : "";
         this.password = password ? password : "";
-        this.rememberMe = rememberMe;
+        this.rememberMe = rememberMe ? rememberMe : false;
     }
 
     saveToLocalStorage(){

@@ -2,9 +2,9 @@ const baseURL = "http://localhost:5000"
 const accountsAPI = new AccountsAPI(baseURL);
 const userData = new UserData();
 const loginDialog = new LoginDialog(
-    $("#loginDlg"), $("#email_input"), $("#password_input"), $("#remember_input"), accountsAPI, userData);
+    $("#loginDlg"), $("#loginDlg #email_input"), $("#loginDlg #password_input"), $("#loginDlg #remember_input"), accountsAPI, userData);
 const registerDialog = new RegisterDialog(
-    $("#registerDlg"),$("#name_input"), $("#email_input"), $("#password_input"), accountsAPI);
+    $("#registerDlg"),$("#registerDlg #name_input"), $("#registerDlg #email_input"), $("#registerDlg #password_input"), accountsAPI);
 
 const btnLogin = $("#btnLogin");
 const btnRegister = $("#btnSignup");
@@ -20,4 +20,3 @@ btnRegister.click((e) => {
     e.preventDefault();
     registerDialog.show();
 });
-
