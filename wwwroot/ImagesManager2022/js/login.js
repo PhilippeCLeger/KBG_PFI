@@ -1,9 +1,11 @@
 class LoginDialog{
-    constructor (dlg, emailInput, passwordInput, AccountsAPI){
+    constructor (dlg, emailInput, passwordInput, rememberMeInput, AccountsAPI, UserData){
         this.dlg = dlg;
         this.emailInput = emailInput;
         this.passwordInput = passwordInput;
+        this.rememberMeInput = rememberMeInput;
         this.API = AccountsAPI;
+        this.UserData = UserData;
         this.__initialize_dialog();
     }
 
@@ -42,6 +44,11 @@ class LoginDialog{
         const successLoginCallback = (data) => {
             console.log("success:");
             console.log(data);
+            this.UserData.Access_token = data.Access_token;
+            this.UserData.UserId = data.UserId;
+            if (this.rememberMeInput.val()){
+                
+            }
             this.hide();
         };
 
