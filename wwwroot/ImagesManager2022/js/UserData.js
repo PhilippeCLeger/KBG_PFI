@@ -1,10 +1,12 @@
 class UserData{
-    static Instance = new UserData();
+    // static Instance = new UserData();
 
     constructor(){
-        this.token = "";
+        this.Access_token = "";
+        this.UserId = -1;
         this.email = "";
         this.password = "";
+        this.loadLocalStorage();
     }
 
     loadLocalStorage(){
