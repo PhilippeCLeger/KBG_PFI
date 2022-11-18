@@ -1,11 +1,11 @@
 class LoginDialog{
-    constructor (dlg, emailInput, passwordInput, rememberMeInput, AccountsAPI, UserData){
+    constructor (dlg, emailInput, passwordInput, rememberMeInput, AccountsAPI, userData){
         this.dlg = dlg;
         this.emailInput = emailInput;
         this.passwordInput = passwordInput;
         this.rememberMeInput = rememberMeInput;
         this.API = AccountsAPI;
-        this.UserData = UserData;
+        this.UserData = userData;
         this.__initialize_dialog();
     }
 
@@ -47,8 +47,11 @@ class LoginDialog{
             this.UserData.Access_token = data.Access_token;
             this.UserData.UserId = data.UserId;
             if (this.rememberMeInput.val()){
-                
-            }
+                this.UserData.email = this.emailInput.val();
+                this.UserData.password = this.passwordInput.val();
+                this.UserData.rememberMe = true;
+                this.UserData.saveToLocalStorage();
+            } else this.UserData.removeLocalStorage();
             this.hide();
         };
 
@@ -61,6 +64,11 @@ class LoginDialog{
     }
 
     show(){
+        if(this.UserData.rememberMe){
+            this.emailInput.val(this.UserData.email);
+            this.passwordInput.val(this.UserData.password);
+            this.rememberMeInput.val(true);
+        } else this.empty();
         this.dlg.dialog('open');
     }
 
@@ -71,5 +79,6 @@ class LoginDialog{
     empty(){
         this.emailInput.val("");
         this.passwordInput.val("");
+        this.rememberMeInput.val(false);
     }
 }

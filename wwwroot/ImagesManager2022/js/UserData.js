@@ -6,23 +6,28 @@ class UserData{
         this.UserId = -1;
         this.email = "";
         this.password = "";
+        this.rememberMe = false;
         this.loadLocalStorage();
     }
 
     loadLocalStorage(){
         const email = window.localStorage.getItem("appEmail");
         const password = window.localStorage.getItem("appPassword");
+        const rememberMe = window.localStorage.getItem("appRememberMe");
         this.email = email ? email : "";
         this.password = password ? password : "";
+        this.rememberMe = rememberMe;
     }
 
     saveToLocalStorage(){
         window.localStorage.setItem("appEmail", this.email);
-        window.localStorage.removeItem("appPassword", this.password);
+        window.localStorage.setItem("appPassword", this.password);
+        window.localStorage.setItem("appRememberMe", this.rememberMe);
     }
 
     removeLocalStorage(){
         window.localStorage.removeItem("appEmail");
         window.localStorage.removeItem("appPassword");
+        window.localStorage.removeItem("appRememberMe");
     }
 }
