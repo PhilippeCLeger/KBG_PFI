@@ -4,3 +4,5 @@ const userData = new UserData();
 const loginDialog = new LoginDialog(
     $("#loginDlg"), $("#email_input"), $("#password_input"), $("#remember_input"), accountsAPI, userData);
 loginDialog.show();
+const registerDialog = new RegisterDialog(
+    $("#registerDlg"),$("#name_input"), $("#email_input"), $("#password_input"), accountsAPI);
