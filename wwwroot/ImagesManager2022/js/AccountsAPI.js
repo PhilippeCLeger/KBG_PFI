@@ -32,8 +32,8 @@ class AccountsAPI{
         $.ajax({
             url: url,
             type: 'POST',
-            contentType:'application/jason',
-            data: JSON.stringify({Name:name, Email:email, Password:password}),
+            contentType:'application/json',
+            data: JSON.stringify({Id:-1,Name:name, Email:email, Password:password}),
             success: function (data){ successCallBack(data); },
             error: function (jqXHR){ errorCallBack(jqXHR.status) }
         })

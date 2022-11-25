@@ -1,4 +1,4 @@
-class RegisterDialog{
+class profilDialog{
     constructor (dlg, nameInput,emailInput, passwordInput, AccountsAPI){
         this.dlg = dlg;
         this.nameInput = nameInput;

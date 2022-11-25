@@ -25,5 +25,14 @@
         "Password": "password",
         "Created": 1668185403,
         "VerifyCode": "verified"
+    },
+    {
+        "Id": 4,
+        "Name": "marian",
+        "Email": "marianstici@gmail.com",
+        "Password": "password",
+        "Created": 1668794196,
+        "VerifyCode": 445312,
+        "AvatarGUID": ""
     }
 ]
