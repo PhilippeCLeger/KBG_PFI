@@ -1,3 +1,4 @@
+
 class AccountsAPI{
 
     constructor(baseURL){
@@ -39,8 +40,31 @@ class AccountsAPI{
         })
     }
 
+
+    modify(newUser, token, successCallBack, errorCallBack){
+        const url = `${this.baseURL}/accounts/modify`;
+        $.ajax({
+            url: url,
+            type: 'PUT',
+            headers:{
+                authorization: token
+            },
+            contentType:'application/json',
+            data: JSON.stringify(newUser),
+            success: function (data){ successCallBack(data); },
+            error: function (jqXHR){ errorCallBack(jqXHR.status) }
+        })
+    }
+
     verifyEmail(userId, code, successCallBack, errorCallBack){
-        const url = this.baseURL + `/accounts/verify?id=3&code=123456`
+        const url = this.baseURL + `/accounts/verify?id=${userId}&code=${code}`
+        $ajax({
+            url: url,
+            type: 'GET',
+            contentType: 'application/json',
+            success: (data) => successCallBack(data),
+            error: (jqXHR) => errorCallBack(jqXHR.status)
+        });
     }
 
     getByID(userID, token, successCallBack, errorCallBack){
