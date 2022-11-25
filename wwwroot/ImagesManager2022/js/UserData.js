@@ -3,7 +3,7 @@ class UserData{
 
     constructor(){
         this.Access_token = "";
-        this.UserId = -1;
+        this.User = null;
         this.email = "";
         this.password = "";
         this.rememberMe = false;
@@ -29,5 +29,9 @@ class UserData{
         window.localStorage.removeItem("appEmail");
         window.localStorage.removeItem("appPassword");
         window.localStorage.removeItem("appRememberMe");
+    }
+
+    setAccessToken(token){
+        this.Access_token = `Bearer ${token}`;
     }
 }

@@ -5,7 +5,7 @@ class AccountsAPI{
     }
 
     login(email, password, successCallBack, errorCallBack){
-        const url = this.baseURL + "/token"
+        const url = this.baseURL + "/token";
         $.ajax({
             url: url,
             type: 'POST',
@@ -21,7 +21,7 @@ class AccountsAPI{
             url: this.baseURL + "/accounts/logout/" + userId,
             type: 'GET',
             contentType: 'application/json',
-            Authorization: processToken(token),
+            Authorization: token,
             success: function (data){ successCallBack(data); },
             error: function (jqXHR){ errorCallBack(jqXHR.status) }
         });
@@ -37,6 +37,21 @@ class AccountsAPI{
             success: function (data){ successCallBack(data); },
             error: function (jqXHR){ errorCallBack(jqXHR.status) }
         })
+    }
+
+    getByID(userID, token, successCallBack, errorCallBack){
+        const url = this.baseURL + "/api/accounts?Id=" + userID
+        console.log(token);
+        console.log(`allo${token}allo`);
+        console.log(url);
+        $.ajax({
+            url: url,
+            type: 'GET',
+            contentType: 'application/json',
+            Authorization: token,
+            success: function (data){ successCallBack(data); },
+            error: function (jqXHR){ errorCallBack(jqXHR.status) }
+        });      
     }
 
     static processToken(baseToken){
