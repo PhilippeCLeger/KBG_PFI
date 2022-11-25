@@ -10,7 +10,7 @@ class RegisterDialog{
 
     __initialize_dialog(){
         this.dlg.dialog({
-            title: "Se Register",
+            title: "S'inscrire",
             autoOpen: false,
             modal: true,
             show: {effect: 'fade', speed: 400},
@@ -41,18 +41,18 @@ class RegisterDialog{
         let name = this.nameInput.val();
         let email = this.emailInput.val();
         let password = this.passwordInput.val();
-        const successLoginCallback = (data) => {
+        const successRegisterCallback = (data) => {
             console.log("success:");
             console.log(data);
             this.hide();
         };
 
-        const errorLoginCallback = (error) => {
+        const errorRegisterCallback = (error) => {
             console.log("error");
             console.log(error);
         };
 
-        this.API.register(name, email, password, successLoginCallback, errorLoginCallback);
+        this.API.register(name, email, password, successRegisterCallback, errorRegisterCallback);
     }
 
     show(){
