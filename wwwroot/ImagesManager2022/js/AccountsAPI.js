@@ -28,7 +28,7 @@ class AccountsAPI{
     }
 
     register(name, email, password, successCallBack, errorCallBack){
-        const url = this.baseURL & "/accounts/register";
+        const url = this.baseURL + "/accounts/register";
         $.ajax({
             url: url,
             type: 'POST',
@@ -37,6 +37,10 @@ class AccountsAPI{
             success: function (data){ successCallBack(data); },
             error: function (jqXHR){ errorCallBack(jqXHR.status) }
         })
+    }
+
+    verifyEmail(userId, code, successCallBack, errorCallBack){
+        const url = this.baseURL + `/accounts/verify?id=3&code=123456`
     }
 
     getByID(userID, token, successCallBack, errorCallBack){
