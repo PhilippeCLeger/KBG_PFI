@@ -1,5 +1,5 @@
 class LoginDialog{
-    constructor (dlg, emailInput, passwordInput, rememberMeInput, AccountsAPI, userData, onLoginSuccess = () => {}){
+    constructor (dlg, emailInput, passwordInput, rememberMeInput, AccountsAPI, userData, onLoginSuccess = (data) => {}){
         this.dlg = dlg;
         this.emailInput = emailInput;
         this.passwordInput = passwordInput;
@@ -39,13 +39,13 @@ class LoginDialog{
     }
 
 
-    login(){
+    async login(){
         let email = this.emailInput.val();
         let password = this.passwordInput.val();
         const successLoginCallback = (data) => {
             console.log("success:");
             console.log(data);
-            this.UserData.Access_token = data.Access_token;
+            this.UserData.setAccessToken(data.Access_token);
             this.UserData.UserId = data.UserId;
             console.log(this.rememberMeInput.prop("checked"));
             if (this.rememberMeInput.prop("checked")){
@@ -58,7 +58,7 @@ class LoginDialog{
                 this.UserData.loadLocalStorage();
             }
             this.hide();
-            this.onLoginSuccess();
+            this.onLoginSuccess(data);
         };
 
         const errorLoginCallback = (error) => {
