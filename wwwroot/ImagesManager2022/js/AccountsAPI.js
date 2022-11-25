@@ -21,7 +21,7 @@ class AccountsAPI{
             url: this.baseURL + "/accounts/logout/" + userId,
             type: 'GET',
             contentType: 'application/json',
-            Authorization: token,
+            authorization: token,
             success: function (data){ successCallBack(data); },
             error: function (jqXHR){ errorCallBack(jqXHR.status) }
         });
@@ -47,8 +47,10 @@ class AccountsAPI{
         $.ajax({
             url: url,
             type: 'GET',
+            headers:{
+                authorization: token
+            },
             contentType: 'application/json',
-            Authorization: token,
             success: function (data){ successCallBack(data); },
             error: function (jqXHR){ errorCallBack(jqXHR.status) }
         });      

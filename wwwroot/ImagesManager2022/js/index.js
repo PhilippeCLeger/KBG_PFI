@@ -11,9 +11,10 @@ const loginDialog = new LoginDialog(
     $("#loginDlg"), $("#loginDlg #email_input"), 
     $("#loginDlg #password_input"), $("#loginDlg #remember_input"), 
     accountsAPI, userData, (loginData) => {
-        const onSuccess = (userData) => {
-            userData.user = data[0];
-            lblUsername.text(user.Name);
+        const onSuccess = (data) => {
+            console.log(data);
+            userData.User = data[0];
+            lblUsername.text(userData.User.Name);
         }
         console.log(userData);
         accountsAPI.getByID(loginData.UserId, userData.Access_token, onSuccess, (err) => console.log(err));
