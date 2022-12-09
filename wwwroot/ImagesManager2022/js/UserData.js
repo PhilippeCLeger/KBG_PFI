@@ -1,7 +1,7 @@
 class UserData{
     // static Instance = new UserData();
 
-    constructor({Access_token="", User="", email="", password="", rememberMe=false}){
+    constructor(){
         this.Access_token = "";
         this.User = null;
         this.email = "";
