@@ -2,6 +2,10 @@ class UserData{
     // static Instance = new UserData();
 
     constructor(){
+        this.resetData();
+    }
+    
+    resetData(){        
         this.Access_token = "";
         this.User = null;
         this.email = "";
