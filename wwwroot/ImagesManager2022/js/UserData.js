@@ -1,7 +1,7 @@
 class UserData{
     // static Instance = new UserData();
 
-    constructor(){
+    constructor({Access_token="", User="", email="", password="", rememberMe=false}){
         this.Access_token = "";
         this.User = null;
         this.email = "";
@@ -34,4 +34,10 @@ class UserData{
     setAccessToken(token){
         this.Access_token = `Bearer ${token}`;
     }
+
+    // loadSessionStorage(){
+    //     if(window.sessionStorage.getItem("UserData")){
+
+    //     }
+    // }
 }
