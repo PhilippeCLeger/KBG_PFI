@@ -9,7 +9,12 @@ module.exports =
     class ImagesRepository extends require('./repository') {
         constructor() {
             super(new ImageModel(), true /* cached */);
-            this.setBindExtraDataMethod(this.bindImageURL);
+            // this.setBindExtraDataMethod(this.bindImageURL);
+            this.setBindExtraDataMethod((image) => {
+                let img2 = this.bindImageURL(image);
+                return this.bindUserData(img2)
+            });
+            this.usersRepository = new UsersRepository();
         }
         bindImageURL(image) {
             if (image) {
@@ -24,6 +29,15 @@ module.exports =
                 return bindedImage;
             }
             return null;
+        }
+        bindUserData(image){
+            if(!image) return null;
+            if(!image.UserId) return image;
+            let bindedImage = {...image};
+            // bindedImage.User = {"Allo":"Hey!!!"}
+            bindedImage.User = this.usersRepository.get(bindedImage.UserId);
+
+            return bindedImage;
         }
         add(image) {
             if (this.model.valid(image)) {
