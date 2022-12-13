@@ -24,7 +24,9 @@
         "Email": "philippe-cosmo.leger@outlook.com",
         "Password": "password",
         "Created": 1668185403,
-        "VerifyCode": "verified"
+        "VerifyCode": "verified",
+        "AvatarGUID": "",
+        "AvatarURL": ""
     },
     {
         "Id": 4,
@@ -33,6 +35,7 @@
         "Password": "password",
         "Created": 1668794196,
         "VerifyCode": 445312,
-        "AvatarGUID": ""
+        "AvatarGUID": "",
+        "AvatarURL": ""
     }
 ]

@@ -6,15 +6,17 @@ const btnRegister = $("#btnSignup");
 const btnProfile = $("#btnProfile");
 const btnLogout = $("#btnLogout");
 const lblUsername = $("#lblUsername");
+const newImageCmd = $("#newImageCmd");
 
 const showLoggedIn = (data) => {
-    console.log(data);
+    // console.log(data);
     userData.User = data[0];
     lblUsername.text(userData.User.Name);
     btnLogin.hide();
     btnLogout.show();
     btnRegister.hide();
     btnProfile.show();
+    newImageCmd.show();
 
 }
 
@@ -26,6 +28,7 @@ const showLoggedOut = () => {
     btnLogout.hide();
     btnRegister.show();
     btnProfile.hide();
+    newImageCmd.hide();
 }
 
 showLoggedOut();
@@ -36,8 +39,9 @@ const loginDialog = new LoginDialog(
     accountsAPI, userData, (loginData) => {
         const onSuccess = (data) => {
             showLoggedIn(data);
+            getImagesList();
         }
-        console.log(userData);
+        // console.log(userData);
         accountsAPI.getByID(loginData.UserId, userData.Access_token, onSuccess, (err) => console.log(err));
     });
 
@@ -61,3 +65,6 @@ btnLogout.click((e) => {
         showLoggedOut();
     }, (err) => console.log(err));
 })
+
+const imageDetailsDialog = new ImageDetailsDialog(
+    $("#imageDetailsDlg"), $("#imageDescription"), $("#imageImage"), $("#imageDate"), $("#imageUserAvatar"), $("#imageUserName") );

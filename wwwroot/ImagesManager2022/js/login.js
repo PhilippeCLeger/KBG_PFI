@@ -43,11 +43,11 @@ class LoginDialog{
         let email = this.emailInput.val();
         let password = this.passwordInput.val();
         const successLoginCallback = (data) => {
-            console.log("success:");
-            console.log(data);
+            // console.log("success:");
+            // console.log(data);
             this.UserData.setAccessToken(data.Access_token);
             this.UserData.UserId = data.UserId;
-            console.log(this.rememberMeInput.prop("checked"));
+            // console.log(this.rememberMeInput.prop("checked"));
             if (this.rememberMeInput.prop("checked")){
                 this.UserData.email = this.emailInput.val();
                 this.UserData.password = this.passwordInput.val();

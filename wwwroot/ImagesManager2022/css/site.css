@@ -131,6 +131,7 @@ textarea2 {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    padding: 0.25rem;
 }
 .imageLayout {
     flex:auto;
@@ -220,6 +221,15 @@ label {
     background-position: center;
     background-repeat: no-repeat;
 }
+
+.image > .avatar{
+    width: 3rem;
+    height: 3rem;
+    background-color: white;
+    background-color: lightgray;
+    border: 2px solid black;
+}
+
 .avatarControl {
     width: 200px !important;
     height: 200px !important;

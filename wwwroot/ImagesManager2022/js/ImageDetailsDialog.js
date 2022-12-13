@@ -1,0 +1,49 @@
+class ImageDetailsDialog{
+    constructor(dialog, description, image, date, userAvatar, userName){
+        this.dialog = dialog;
+        this.description = description;
+        this.image = image;
+        this.date = date;
+        this.userAvatar = userAvatar;
+        this.userName = userName;
+    }
+
+    __initialize_dialog(){
+        this.dlg.dialog({
+            title: "ImageTitle",
+            autoOpen: false,
+            modal: true,
+            show: {effect: 'fade', speed: 400},
+            hide: {effect: 'fade', speed: 400},
+            width: 500, minWidth: 500, maxWidth: 500,
+            height: 500, minHeight: 500, maxHeight: 500,
+            position: {},
+            buttons: []
+        });
+    }
+
+
+    fillDialog(image){
+        this.dialog.dialog({title: image.Title});
+        // this.title.text(image.Title);
+        this.description.text(image.description);
+        this.image.css("background-image", `url('${image.ThumbnailURL}')`);
+        this.date.text(convertToFrenchDate(parseInt(image.Date)));
+        this.userAvatar.css("backgroud-image", `url('${image.User.AvatarURL}')`);
+        this.userName.text(image.User.Name);
+        console.log(image);
+    }
+
+    show(){
+        this.dialog.dialog("open");
+    }
+
+    hide(){
+        this.dialog.dialog('close');
+    }
+
+    showImage(image, currentUser){
+        this.fillDialog(image);
+        this.show();
+    }
+}
