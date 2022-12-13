@@ -6,10 +6,11 @@ class ImageDetailsDialog{
         this.date = date;
         this.userAvatar = userAvatar;
         this.userName = userName;
+        this.__initialize_dialog();
     }
 
     __initialize_dialog(){
-        this.dlg.dialog({
+        this.dialog.dialog({
             title: "ImageTitle",
             autoOpen: false,
             modal: true,

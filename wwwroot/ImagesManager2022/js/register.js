@@ -19,7 +19,7 @@ class RegisterDialog{
             show: {effect: 'fade', speed: 400},
             hide: {effect: 'fade', speed: 400},
             width: 500, minWidth: 500, maxWidth: 500,
-            height: 500, minHeight: 500, maxHeight: 500,
+            height: 600, minHeight: 600, maxHeight: 600,
             position: {},
             buttons: [
                 {

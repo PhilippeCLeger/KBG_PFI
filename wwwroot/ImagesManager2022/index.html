@@ -87,6 +87,11 @@
                     <input type="text" name="" id="email_input" placeholder="Courriel">
                     <input type="password" name="" id="password_input" placeholder="Mot de passe">
                     <input type="password" name="" id="password2_input" placeholder="Confirmer le mot de passe">
+                    <br>
+                    <label for="avatar">Image</label>
+                        <div id='avatar' class='ImageUploader' defaultImage='images/No_Image.png'
+                            waitingImage='images/writing.gif'>
+                        </div>
                 </div>
                 <div id="imageDlg">
                     <form id="imageForm">
@@ -100,7 +105,7 @@
 
                         <label for="decription_input">Description</label>
                         <textarea id="description_input" class="form-control" required></textarea>
-
+                        
                         <label for="image">Image</label>
                         <div id='image' class='ImageUploader' defaultImage='images/No_Image.png'
                             waitingImage='images/writing.gif'>
