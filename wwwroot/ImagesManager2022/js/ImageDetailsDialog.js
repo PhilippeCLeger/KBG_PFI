@@ -31,7 +31,7 @@ class ImageDetailsDialog{
         this.image.children().css("background-image", `url('${image.ThumbnailURL}')`);
         this.image.prop("href", image.OriginalURL);
         this.date.text(convertToFrenchDate(parseInt(image.Date)));
-        this.userAvatar.css("backgroud-image", `url('${!image.User.AvatarURL ? "./images/No_Avatar.png" : image.User.AvatarURL}')`);
+        this.userAvatar.css("background-image", `url('${!image.User.AvatarURL ? "./images/No_Avatar.png" : image.User.AvatarURL}')`);
         this.userName.text(image.User.Name);
         console.log(image);
     }

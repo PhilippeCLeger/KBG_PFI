@@ -6,39 +6,64 @@ const btnRegister = $("#btnSignup");
 const btnProfile = $("#btnProfile");
 const btnLogout = $("#btnLogout");
 const lblUsername = $("#lblUsername");
+const connectedUserAvatar = $("#connectedUserAvatar");
 const newImageCmd = $("#newImageCmd");
+const btnSortDateAsc = $("#btnSortDateAsc");
+const btnSortDateDesc = $("#btnSortDateDesc");
+const btnSearch = $("#btnSearch");
 
-const showLoggedIn = (data) => {
+
+function getAvatarURL(user){
+    return !user || !user.AvatarURL ? "./images/No_Avatar.png": user.AvatarURL;
+}
+
+const UpdateDisplay = () => {
+    if(!userData.User){
+        lblUsername.text("");
+        connectedUserAvatar.hide();
+        connectedUserAvatar.css("background-image", `url('')`);
+        btnLogin.show();
+        btnLogout.hide();
+        btnRegister.show();
+        btnProfile.hide();
+        newImageCmd.hide();
+    } else {
+        lblUsername.text(userData.User.Name);
+        connectedUserAvatar.css("background-image", `url('${getAvatarURL(userData.User)}')`);
+        connectedUserAvatar.show();
+        btnLogin.hide();
+        btnLogout.show();
+        btnRegister.hide();
+        btnProfile.show();
+        newImageCmd.show();
+    }
+    getImagesList();
+}
+
+const loginSuccess = (data) => {
     // console.log(data);
     userData.User = data[0];
-    lblUsername.text(userData.User.Name);
-    btnLogin.hide();
-    btnLogout.show();
-    btnRegister.hide();
-    btnProfile.show();
-    newImageCmd.show();
-
+    UpdateDisplay();
 }
 
-const showLoggedOut = () => {
+const logoutSuccess = () => {
     userData.User = null;
     userData.Access_token="";
-    lblUsername.text("");
-    btnLogin.show();
-    btnLogout.hide();
-    btnRegister.show();
-    btnProfile.hide();
-    newImageCmd.hide();
+    UpdateDisplay();
 }
 
-showLoggedOut();
+const updateUser = (userId) => {
+    accountsAPI.getByID(userId, userData.Access_token, loginSuccess, (err) => console.log(err) );
+}
+
+logoutSuccess();
 
 const loginDialog = new LoginDialog(
     $("#loginDlg"), $("#loginDlg #email_input"), 
     $("#loginDlg #password_input"), $("#loginDlg #remember_input"), 
     accountsAPI, userData, (loginData) => {
         const onSuccess = (data) => {
-            showLoggedIn(data);
+            loginSuccess(data);
             getImagesList();
         }
         // console.log(userData);
@@ -67,7 +92,7 @@ btnRegister.click((e) => {
 btnLogout.click((e) => {
     e.preventDefault();
     accountsAPI.logout(userData.User.Id, userData.Access_token, () => {
-        showLoggedOut();
+        logoutSuccess();
     }, (err) => console.log(err));
 })
 
