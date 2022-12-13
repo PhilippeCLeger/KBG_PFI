@@ -64,6 +64,7 @@
                         <i class="cmd fas fa-sign-out-alt" id="btnLogout" title="Se déconnecter" data-toggle="tooltip"></i>
                         <i class="cmd fas fa-user-plus" id="btnSignup" title="S'inscrire" data-toggle="tooltip"></i>
                         <i class="cmd fas fa-address-card" id="btnProfile" title="Éditer mon profile" data-toggle="tooltip"></i>
+                        <i class="cmd fas fa-regular fa-envelope" id="btnVerification" title="Verifier votre courielle" data-toggle="tooltip"></i>
                     </div>
                 </div>
             </div>
@@ -93,6 +94,12 @@
                         <div id='avatar' class='ImageUploader' defaultImage='images/No_Image.png'
                             waitingImage='images/writing.gif'>
                         </div>
+                </div>
+                <div id="verificationDlg">
+                    <form id="verificationForm">
+                        <h5>Consulter votre boite de courriel pour connaitre votre code de verification et inscrivez-le ci-dessous</h5>
+                        <input type="text" name="" id="codeV_input" placeholder="Code de verification">
+                    </form>
                 </div>
                 <div id="imageDlg">
                     <form id="imageForm">

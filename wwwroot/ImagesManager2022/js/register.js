@@ -1,9 +1,10 @@
 class RegisterDialog{
-    constructor (dlg, nameInput,emailInput, passwordInput, avatarInput, avatarGUID, AccountsAPI, userData){
+    constructor (dlg, nameInput,emailInput, passwordInput, password2Input, avatarInput, avatarGUID, AccountsAPI, userData){
         this.dlg = dlg;
         this.nameInput = nameInput;
         this.emailInput = emailInput;
         this.passwordInput = passwordInput;
+        this.password2Input = password2Input;
         this.API = AccountsAPI;
         this.__initialize_dialog();
         this.send = this.register;
@@ -41,13 +42,56 @@ class RegisterDialog{
         });
     }
 
-
+    setRegisterBtn(){
+        this.dlg.dialog({
+            buttons: [
+                {
+                    text: "Envoyer",
+                    click: (e) => {
+                        e.preventDefault();
+                        this.send();
+                    }
+                },
+                {
+                    text: "Annuler",
+                    click: () => {
+                        this.hide();
+                    }
+                }
+            ]
+        })
+    }
+    setRegisterBtn(){
+        this.dlg.dialog({
+            buttons: [
+                {
+                    text: "Envoyer",
+                    click: (e) => {
+                        e.preventDefault();
+                        this.send();
+                    }
+                },
+                {
+                    text: "Annuler",
+                    click: () => {
+                        this.hide();
+                    }
+                },
+                {
+                    text: 'Desinscrire', 
+                    click: () =>{
+                        this.retirerCompte();
+                    }}
+            ]
+        })
+    }
 
     register(){
         let newUser = {};
         newUser.Name = this.nameInput.val();
         newUser.Email = this.emailInput.val();
         newUser.Password = this.passwordInput.val();
+        password2 = this.password2Input.val();
         const successRegisterCallback = (data) => {
             console.log("success:");
             console.log(data);
@@ -60,7 +104,13 @@ class RegisterDialog{
         };
         newUser.ImageData = ImageUploader.getImageData(this.avatar.attr("id"));
         newUser.AvatarGUID = this.avatarGUID.val();
-        this.API.register(newUser, successRegisterCallback, errorRegisterCallback);
+        if(newUser.Password = password2){
+            this.API.register(newUser, successRegisterCallback, errorRegisterCallback);
+        }
+        else{
+
+        }
+        
     }
 
     modify(){
