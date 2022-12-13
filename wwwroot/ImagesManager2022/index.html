@@ -194,7 +194,7 @@
                 const currentUser = userData.User;
                 function insertIntoImageList(image) {
                     const avatarURL = getAvatarURL(image, currentUser);
-                    const imageDisplay = $(` 
+                    const imageContainer = $(` 
                                 <div class='imageLayout'>
 
                                     <div class='imageHeader'>
@@ -212,15 +212,16 @@
                                             </div>` : ""
                                         }
                                     </div>
-                                    <div    class='image' 
+                                </div>
+                        `);
+                    const imageDisplay = $(`<div    class='image' 
                                             style="background-image:url('${image.ThumbnailURL}')">
                                         ${avatarURL ? `<div class="avatar" style="background-image: url('${avatarURL}');" title="${image.User.Name}" data-toggle="tooltip" ></div>` : ""}
-                                    </div>
-                                    <div class="imageDate">${convertToFrenchDate(parseInt(image.Date))}</div>
-                                </div>
-                        `)
+                                    </div>`);
                     imageDisplay.click(() =>imageDetailsDialog.showImage(image, currentUser));
-                    $("#imagesList").append(imageDisplay);
+                    imageContainer.append(imageDisplay);
+                    imageContainer.append($(`<div class="imageDate">${convertToFrenchDate(parseInt(image.Date))}</div>`))
+                    $("#imagesList").append(imageContainer);
                 }
                 currentETag = ETag;
                 previousScrollPosition = $(".scrollContainer").scrollTop();
