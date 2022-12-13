@@ -1,5 +1,5 @@
 class RegisterDialog{
-    constructor (dlg, nameInput,emailInput, passwordInput, AccountsAPI, userData){
+    constructor (dlg, nameInput,emailInput, passwordInput, AccountsAPI, userData, image){
         this.dlg = dlg;
         this.nameInput = nameInput;
         this.emailInput = emailInput;
@@ -9,6 +9,8 @@ class RegisterDialog{
         this.send = this.register;
         this.oldUser = null;
         this.userData = userData;
+        this.image = image;
+        this.imageUploader = new ImageUploader(image.attr("id"));
     }
 
     __initialize_dialog(){

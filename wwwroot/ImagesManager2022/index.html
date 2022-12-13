@@ -117,7 +117,10 @@
                     </div>
                     <p id="imageDate"></p>
                     <p id="imageDescription"></p>
-                    <div class="image" id="imageImage"></div>
+                    <!-- <div ></div> -->
+                    <a href="" target="_blank" id="imageImage">
+                        <div class="image"></div>
+                    </a>
                 </div>
                 <div id="confirmDeleteDlg">
                     <span id="confirmationMessage"></span>
@@ -203,12 +206,10 @@
                                             </div>` : ""
                                         }
                                     </div>
-                                    <a href="${image.OriginalURL}" target="_blank">
-                                        <div    class='image' 
-                                                style="background-image:url('${image.ThumbnailURL}')">
-                                            ${avatarURL ? `<div class="avatar" style="background-image: url('${avatarURL}');" title="${image.User.Name}" data-toggle="tooltip" ></div>` : ""}
-                                        </div>
-                                    </a>
+                                    <div    class='image' 
+                                            style="background-image:url('${image.ThumbnailURL}')">
+                                        ${avatarURL ? `<div class="avatar" style="background-image: url('${avatarURL}');" title="${image.User.Name}" data-toggle="tooltip" ></div>` : ""}
+                                    </div>
                                     <div class="imageDate">${convertToFrenchDate(parseInt(image.Date))}</div>
                                 </div>
                         `)

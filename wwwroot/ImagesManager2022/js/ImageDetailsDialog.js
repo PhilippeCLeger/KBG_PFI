@@ -6,10 +6,11 @@ class ImageDetailsDialog{
         this.date = date;
         this.userAvatar = userAvatar;
         this.userName = userName;
+        this.__initialize_dialog();
     }
 
     __initialize_dialog(){
-        this.dlg.dialog({
+        this.dialog.dialog({
             title: "ImageTitle",
             autoOpen: false,
             modal: true,
@@ -26,10 +27,11 @@ class ImageDetailsDialog{
     fillDialog(image){
         this.dialog.dialog({title: image.Title});
         // this.title.text(image.Title);
-        this.description.text(image.description);
-        this.image.css("background-image", `url('${image.ThumbnailURL}')`);
+        this.description.text(image.Description);
+        this.image.children().css("background-image", `url('${image.ThumbnailURL}')`);
+        this.image.prop("href", image.OriginalURL);
         this.date.text(convertToFrenchDate(parseInt(image.Date)));
-        this.userAvatar.css("backgroud-image", `url('${image.User.AvatarURL}')`);
+        this.userAvatar.css("backgroud-image", `url('${!image.User.AvatarURL ? "./images/No_Avatar.png" : image.User.AvatarURL}')`);
         this.userName.text(image.User.Name);
         console.log(image);
     }

@@ -141,6 +141,9 @@ textarea2 {
     align-content: stretch;
     scroll-snap-align:start;
 }
+
+.imageLayout:hover{cursor: pointer;}
+
 @media (max-width: 1980px) {
     .imageLayout {
         min-width:300px;

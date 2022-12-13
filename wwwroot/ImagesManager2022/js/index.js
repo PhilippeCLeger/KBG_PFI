@@ -67,4 +67,9 @@ btnLogout.click((e) => {
 })
 
 const imageDetailsDialog = new ImageDetailsDialog(
-    $("#imageDetailsDlg"), $("#imageDescription"), $("#imageImage"), $("#imageDate"), $("#imageUserAvatar"), $("#imageUserName") );
+    $("#imageDetailsDlg"), 
+    $("#imageDescription"), 
+    $("#imageImage"), 
+    $("#imageDate"), 
+    $("#imageUserAvatar"), 
+    $("#imageUserName") );
