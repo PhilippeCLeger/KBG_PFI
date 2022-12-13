@@ -76,6 +76,11 @@ btnProfile.click((e) => {
     registerDialog.editProfile(userData.User);
 })
 
+btnVerification.click((e) => {
+    e.preventDefault();
+    verificationDialog.show();
+})
+
 const imageDetailsDialog = new ImageDetailsDialog(
     $("#imageDetailsDlg"), 
     $("#imageDescription"), 
