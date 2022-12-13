@@ -20,8 +20,9 @@ body {
 }
 .headerLayout {
     display: grid;
-    grid-template-columns: 80px auto 60px;
+    grid-template-columns: 80px auto 30px auto 1fr;
     align-items: center;
+    width: 100%;
 }
 .outLinedText {
     font-size: 30px !important;

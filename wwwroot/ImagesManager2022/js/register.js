@@ -51,6 +51,7 @@ class RegisterDialog{
         const successRegisterCallback = (data) => {
             console.log("success:");
             console.log(data);
+            updateUser(userData.User.Id);
             this.hide();
         };
 
@@ -74,6 +75,7 @@ class RegisterDialog{
         const successModifyCallback = (data) => {
             console.log("success:");
             console.log(data);
+            updateUser(userData.User.Id);
             this.hide();
         };
 
