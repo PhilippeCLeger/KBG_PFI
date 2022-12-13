@@ -46,7 +46,12 @@ const loginDialog = new LoginDialog(
     });
 
     const registerDialog = new RegisterDialog(
-    $("#registerDlg"),$("#registerDlg #name_input"), $("#registerDlg #email_input"), $("#registerDlg #password_input"), accountsAPI);
+        $("#registerDlg"),
+        $("#registerDlg #name_input"), 
+        $("#registerDlg #email_input"), 
+        $("#registerDlg #password_input"),
+        $("#avatar"), $("#r_avatar_GUID"),
+        accountsAPI, userData);
 
 
 btnLogin.click((e) => {
@@ -64,6 +69,11 @@ btnLogout.click((e) => {
     accountsAPI.logout(userData.User.Id, userData.Access_token, () => {
         showLoggedOut();
     }, (err) => console.log(err));
+})
+
+btnProfile.click((e) => {
+    e.preventDefault();
+    registerDialog.editProfile(userData.User);
 })
 
 const imageDetailsDialog = new ImageDetailsDialog(

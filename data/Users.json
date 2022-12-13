@@ -20,13 +20,13 @@
     },
     {
         "Id": 3,
-        "Name": "Philippe C. Léger2",
+        "Name": "Philippe C. Léger",
         "Email": "philippe-cosmo.leger@outlook.com",
-        "Password": "password",
         "Created": 1668185403,
         "VerifyCode": "verified",
-        "AvatarGUID": "",
-        "AvatarURL": ""
+        "AvatarGUID": "ccbd26a0-7b03-11ed-ae7e-21c9ce1aa435",
+        "AvatarURL": "",
+        "Password": "qwerty"
     },
     {
         "Id": 4,
@@ -37,5 +37,14 @@
         "VerifyCode": 445312,
         "AvatarGUID": "",
         "AvatarURL": ""
+    },
+    {
+        "Name": "Nouvelle personne",
+        "Email": "philfitnesss@gmail.com",
+        "Password": "password",
+        "AvatarGUID": "f658b380-7b03-11ed-ae7e-21c9ce1aa435",
+        "Id": 5,
+        "Created": 1670949247,
+        "VerifyCode": 746441
     }
 ]

@@ -28,13 +28,13 @@ class AccountsAPI{
         });
     }
 
-    register(name, email, password, successCallBack, errorCallBack){
+    register(newUser, successCallBack, errorCallBack){
         const url = this.baseURL + "/accounts/register";
         $.ajax({
             url: url,
             type: 'POST',
             contentType:'application/json',
-            data: JSON.stringify({Id:-1,Name:name, Email:email, Password:password}),
+            data: JSON.stringify({...newUser, Id:-1}),
             success: function (data){ successCallBack(data); },
             error: function (jqXHR){ errorCallBack(jqXHR.status) }
         })

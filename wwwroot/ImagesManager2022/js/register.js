@@ -1,5 +1,5 @@
 class RegisterDialog{
-    constructor (dlg, nameInput,emailInput, passwordInput, AccountsAPI, userData, image){
+    constructor (dlg, nameInput,emailInput, passwordInput, avatarInput, avatarGUID, AccountsAPI, userData){
         this.dlg = dlg;
         this.nameInput = nameInput;
         this.emailInput = emailInput;
@@ -9,8 +9,8 @@ class RegisterDialog{
         this.send = this.register;
         this.oldUser = null;
         this.userData = userData;
-        this.image = image;
-        this.imageUploader = new ImageUploader(image.attr("id"));
+        this.avatar = avatarInput;
+        this.avatarGUID = avatarGUID;
     }
 
     __initialize_dialog(){
@@ -28,7 +28,7 @@ class RegisterDialog{
                     text: "Envoyer",
                     click: (e) => {
                         e.preventDefault();
-                        this.register();
+                        this.send();
                     }
                 },
                 {
@@ -44,9 +44,10 @@ class RegisterDialog{
 
 
     register(){
-        let name = this.nameInput.val();
-        let email = this.emailInput.val();
-        let password = this.passwordInput.val();
+        let newUser = {};
+        newUser.Name = this.nameInput.val();
+        newUser.Email = this.emailInput.val();
+        newUser.Password = this.passwordInput.val();
         const successRegisterCallback = (data) => {
             console.log("success:");
             console.log(data);
@@ -57,19 +58,19 @@ class RegisterDialog{
             console.log("error");
             console.log(error);
         };
-
-        this.API.register(name, email, password, successRegisterCallback, errorRegisterCallback);
+        newUser.ImageData = ImageUploader.getImageData(this.avatar.attr("id"));
+        newUser.AvatarGUID = this.avatarGUID.val();
+        this.API.register(newUser, successRegisterCallback, errorRegisterCallback);
     }
 
     modify(){
-        let name = this.nameInput.val();
-        let email = this.emailInput.val();
-        let password = this.passwordInput.val();
         const newUser = {...this.oldUser};
-        newUser.Name = name;
-        newUser.Email = email;
-        if(!!password) newUser.Password = Password;
+        newUser.Name = this.nameInput.val();
+        newUser.Email = this.emailInput.val();
+        newUser.Password = this.passwordInput.val();
 
+        newUser.ImageData = ImageUploader.getImageData(this.avatar.attr("id"))
+        newUser.AvatarGUID = this.avatarGUID.val();
         const successModifyCallback = (data) => {
             console.log("success:");
             console.log(data);
@@ -95,22 +96,27 @@ class RegisterDialog{
         this.nameInput.val("");
         this.emailInput.val("");
         this.passwordInput.val("");
+        ImageUploader.resetImage(this.avatar.attr("id"));
+        this.avatarGUID.val("");
         this.oldUser = null;
     }
-
+    
     addUser(){
         this.empty;
         this.send = this.register;
         this.show();
     }
-
+    
     editProfile(user){
         this.empty();
         this.send = this.modify;
+        this.dlg.dialog({Title: "Modifier son profil"})
         this.oldUser = user;
         this.nameInput.val(user.Name);
         this.emailInput.val(user.Email);
-        this.passwordInput.val("");
+        this.passwordInput.val();
         this.show();
+        ImageUploader.setImage(this.avatar.attr("id"), user.AvatarURL);
+        this.avatarGUID.val(user.AvatarGUID)
     }
 }
