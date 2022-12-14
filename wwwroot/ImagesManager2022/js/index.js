@@ -10,7 +10,8 @@ const connectedUserAvatar = $("#connectedUserAvatar");
 const newImageCmd = $("#newImageCmd");
 const btnSortDateAsc = $("#btnSortDateAsc");
 const btnSortDateDesc = $("#btnSortDateDesc");
-const btnSearch = $("#btnSearch");
+const btnShowSearch = $("#btnShowSearch");
+const btnHideSearch = $("#btnHideSearch");
 
 
 function getAvatarURL(user){
