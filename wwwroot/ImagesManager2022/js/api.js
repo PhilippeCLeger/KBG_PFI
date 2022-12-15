@@ -9,47 +9,62 @@ function HEAD(successCallBack, errorCallBack) {
         error: function (jqXHR) { errorCallBack(jqXHR.status) }
     });
 }
-function GET_ID(id, successCallBack, errorCallBack) {
+function GET_ID(id, token, successCallBack, errorCallBack) {
     $.ajax({
         url: apiBaseURL + "/" + id,
         type: 'GET',
+        headers:{
+            authorization: token
+        },
         success: data => { successCallBack(data); },
         error: function (jqXHR) { errorCallBack(jqXHR.status) }
     });
 }
-function GET_ALL(successCallBack, errorCallBack, queryString = null) {
+function GET_ALL(token, successCallBack, errorCallBack, queryString = null) {
     let url = apiBaseURL + (queryString ? queryString : "");
     $.ajax({
         url: url,
         type: 'GET',
+        headers:{
+            authorization: token
+        },
         success: (data, status, xhr) => { successCallBack(data, xhr.getResponseHeader("ETag")) },
         error: function (jqXHR) { errorCallBack(jqXHR.status) }
     });
 }
-function POST(data, successCallBack, errorCallBack) {
+function POST(data, token, successCallBack, errorCallBack) {
     $.ajax({
         url: apiBaseURL,
         type: 'POST',
+        headers:{
+            authorization: token
+        },
         contentType: 'application/json',
         data: JSON.stringify(data),
         success: (data) => { successCallBack(data) },
         error: function (jqXHR) { errorCallBack(jqXHR.status) }
     });
 }
-function PUT(bookmark, successCallBack, errorCallBack) {
+function PUT(bookmark, token, successCallBack, errorCallBack) {
     $.ajax({
         url: apiBaseURL + "/" + bookmark.Id,
         type: 'PUT',
+        headers:{
+            authorization: token
+        },
         contentType: 'application/json',
         data: JSON.stringify(bookmark),
         success: () => { successCallBack() },
         error: function (jqXHR) { errorCallBack(jqXHR.status) }
     });
 }
-function DELETE(id, successCallBack, errorCallBack) {
+function DELETE(id, token, successCallBack, errorCallBack) {
     $.ajax({
         url: apiBaseURL + "/" + id,
         type: 'DELETE',
+        headers:{
+            authorization: token
+        },
         success: () => { successCallBack() },
         error: function (jqXHR) { errorCallBack(jqXHR.status) }
     });

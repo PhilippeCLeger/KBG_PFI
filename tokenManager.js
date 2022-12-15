@@ -52,13 +52,24 @@ class TokenManager {
         }
         return null;
     }
-    static requestAuthorized(req) {
+
+    static getToken(req){
         if (req.headers["authorization"] != undefined) {
             // Extract bearer token from head of the http request
             let token = req.headers["authorization"].replace('Bearer ', '');
-            return (this.find(token) != null);
+            return this.find(token);
         }
-        return false;
+        return null;
+    }
+
+    static requestAuthorized(req) {
+        return TokenManager.getToken(req) != null;
+        // if (req.headers["authorization"] != undefined) {
+        //     // Extract bearer token from head of the http request
+        //     let token = req.headers["authorization"].replace('Bearer ', '');
+        //     return (this.find(token) != null);
+        // }
+        // return false;
     }
 }
 

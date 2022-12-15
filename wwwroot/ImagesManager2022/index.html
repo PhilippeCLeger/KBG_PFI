@@ -63,7 +63,7 @@
                         <span class="cmd fas fa-sort-amount-up" id="btnSortDateAsc" title="Classer en ordre chronologique" data-toggle="tooltip"></span>
                         <span class="cmd fas fa-sort-amount-down" id="btnSortDateDesc" title="Classer en ordre chronologique inverse" data-toggle="tooltip"></span>
                         <span class="cmd fas fa-search-plus" id="btnShowSearch" title="Rechercher" data-toggle="tooltip"></span>
-                        <span class="cmd fas fa-search-plus" id="btnHideSearch" title="Rechercher" data-toggle="tooltip"></span>
+                        <span class="cmd fas fa-search-minus" id="btnHideSearch" title="Rechercher" data-toggle="tooltip"></span>
                     </div>
                     <div class="d-flex justify-content-between me-3">
                         <div></div>
@@ -202,7 +202,7 @@
                     }
                     return queryString;
                 }
-                GET_ALL(refreshimagesList, error, prepareQueryString());
+                GET_ALL(userData.Access_token, refreshimagesList, error, prepareQueryString());
             }
 
 
@@ -220,7 +220,7 @@
 
                                     <div class='imageHeader'>
                                         <div class="imageTitle">${image.Title}</div>${
-                                            currentUser && currentUser.Id == image.UserId ?
+                                            true || currentUser && currentUser.Id == image.UserId ?
                                             `<div    class="cmd editCmd  fa fa-pencil-square" 
                                                     imageid="${image.Id}" 
                                                     title="Editer ${image.Title}" 
@@ -307,7 +307,7 @@
             function editimage(e) {
                 holdCheckETag = true;
                 createMode = false;
-                GET_ID(e.target.getAttribute("imageid"), imageToForm, error);
+                GET_ID(e.target.getAttribute("imageid"),userData.Access_token, imageToForm, error);
                 holdCheckETag = true;
                 ImageUploader.imageRequired('image', false);
                 $("#imageDlg").dialog('option', 'title', "Modification d'image");
@@ -319,6 +319,7 @@
                 imageIdToDelete = e.target.getAttribute("imageid")
                 GET_ID(
                     imageIdToDelete,
+                    userData.Access_token,
                     image => {
                         $("#confirmationMessage").html("Voulez-vous vraiment effacer l'image <br><b>" + image.Title + "</b>?")
                     },
@@ -394,11 +395,11 @@
                             let image = imageFromForm();
                             if (image) {
                                 if (createMode) {
-                                    POST(image, getImagesList, error);
+                                    POST(image, userData.Access_token, getImagesList, error);
                                     $(".scrollContainer").scrollTop(0);
                                 }
                                 else
-                                    PUT(image, getImagesList, error);
+                                    PUT(image, userData.Access_token, getImagesList, error);
                                 resetimageForm();
                                 holdCheckETag = false;
                                 $(this).dialog("close");
@@ -429,7 +430,7 @@
                         click: function () {
                             holdCheckETag = false;
                             if (imageIdToDelete)
-                                DELETE(imageIdToDelete, getImagesList, error);
+                                DELETE(imageIdToDelete, userData.Access_token, getImagesList, error);
                             imageIdToDelete = 0;
                             $(this).dialog("close");
                         }
