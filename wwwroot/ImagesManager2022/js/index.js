@@ -85,8 +85,8 @@ const registerDialog = new RegisterDialog(
     $("#registerDlg #email_input"), 
     $("#registerDlg #password_input"),
     $("#avatar"), $("#r_avatar_GUID"),
-    accountsAPI, userData);
-
+    accountsAPI, userData
+);
 
 btnLogin.click((e) => {
     e.preventDefault();
@@ -110,15 +110,12 @@ btnProfile.click((e) => {
     registerDialog.editProfile(userData.User);
 })
 
-const verificationDialog = new verificationDialog(
-$("#codeV_input"),$('#') , accountsAPI, userData, (loginData) => {
-    const onSuccess = (data) => {
-        loginSuccess(data);
-        getImagesList();
-    }
-    // console.log(userData);
-    accountsAPI.getByID(loginData.UserId, userData.Access_token, onSuccess, (err) => console.log(err));
-});
+const verificationDialog = new verificationDialog(   
+    $('#verificationDlg'),
+    $("#codeV_input"),
+    accountsAPI, 
+    userData
+);
 
 btnVerification.click((e) => {
     e.preventDefault();

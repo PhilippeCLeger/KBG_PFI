@@ -1,11 +1,10 @@
 class verificationDialog{
     constructor (dlg, codeV_input, AccountsAPI, userData){
         this.dlg = dlg;
-        this.userId = userId;
         this.codeV_input = codeV_input;
         this.API = AccountsAPI;
-        this.__initialize_dialog();
         this.userData = userData;
+        this.__initialize_dialog();
         this.send = this.verfication();
         verificationDialog.show();
     }
