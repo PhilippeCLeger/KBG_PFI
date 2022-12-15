@@ -247,3 +247,12 @@ div2,
 span2 {
     border: 1px solid red;
 }
+
+#filterPanel{
+    background-color: gray;
+    display: grid;
+    padding: 1rem;
+    grid-template-columns: 16rem 16rem 2rem;
+    column-gap: 1rem;
+    border-top: 1px solid dimgray;
+}
