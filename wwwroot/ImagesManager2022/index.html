@@ -190,17 +190,18 @@
                 }
             }
 
+            // const qsBuilder = new QueryStringBuilder();
             function getImagesList(refresh = true) {
                 appendMode = !refresh;
                 function prepareQueryString() {
                     let queryString = "";
                     if (appendMode) {
-                        queryString = `?sort=Date,desc&offset=${Math.trunc(imagesCount / appendCount)}&limit=${appendCount}`;
+                        queryString = `offset=${Math.trunc(imagesCount / appendCount)}&limit=${appendCount}`;
                         imagesCount += appendCount;
                     } else {
-                        queryString = `?sort=Date,desc&offset=${0}&limit=${imagesCount}`;
+                        queryString = `offset=${0}&limit=${imagesCount}`;
                     }
-                    return queryString;
+                    return qsBuilder.getQueryString(queryString);
                 }
                 GET_ALL(userData.Access_token, refreshimagesList, error, prepareQueryString());
             }
@@ -472,6 +473,7 @@
             }
         </script>
 
+        <script src="js/QueryStringBuilder.js"></script>
         <script src="js/UserData.js"></script>
         <script src="js/AccountsAPI.js"></script>
         <script src="js/login.js"></script>

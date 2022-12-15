@@ -13,6 +13,7 @@ const btnSortDateDesc = $("#btnSortDateDesc");
 const btnShowSearch = $("#btnShowSearch");
 const btnHideSearch = $("#btnHideSearch");
 
+const qsBuilder = new QueryStringBuilder();
 
 function getAvatarURL(user){
     return !user || !user.AvatarURL ? "./images/No_Avatar.png": user.AvatarURL;
@@ -114,3 +115,22 @@ const imageDetailsDialog = new ImageDetailsDialog(
     $("#imageDate"), 
     $("#imageUserAvatar"), 
     $("#imageUserName") );
+
+
+btnSortDateDesc.click((e) => {
+    e.preventDefault();
+    qsBuilder.sortDatesDesc = true;
+    btnSortDateAsc.show();
+    btnSortDateDesc.hide();
+    getImagesList();
+});
+
+btnSortDateAsc.click((e) => {
+    e.preventDefault();
+    qsBuilder.sortDatesDesc = false;
+    btnSortDateAsc.hide();
+    btnSortDateDesc.show();
+    getImagesList();
+});
+btnSortDateAsc.show();
+btnSortDateDesc.hide();
