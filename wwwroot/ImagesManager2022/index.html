@@ -81,7 +81,9 @@
                     </div>
                 </div>
             </div>
+            <div class="filterPanel">
 
+            </div>
             <div class="scrollContainer">
                 <div id="imagesList">
                     <!-- filled programmatically-->
@@ -221,7 +223,7 @@
 
                                     <div class='imageHeader'>
                                         <div class="imageTitle">${image.Title}</div>${
-                                            true || currentUser && currentUser.Id == image.UserId ?
+                                            currentUser && currentUser.Id == image.UserId ?
                                             `<div    class="cmd editCmd  fa fa-pencil-square" 
                                                     imageid="${image.Id}" 
                                                     title="Editer ${image.Title}" 
