@@ -62,8 +62,8 @@
                             data-toggle="tooltip"></span>
                         <span class="cmd fas fa-sort-amount-up" id="btnSortDateAsc" title="Classer en ordre chronologique" data-toggle="tooltip"></span>
                         <span class="cmd fas fa-sort-amount-down" id="btnSortDateDesc" title="Classer en ordre chronologique inverse" data-toggle="tooltip"></span>
-                        <span class="cmd fas fa-search-plus" id="btnShowSearch" title="Rechercher" data-toggle="tooltip"></span>
-                        <span class="cmd fas fa-search-minus" id="btnHideSearch" title="Rechercher" data-toggle="tooltip"></span>
+                        <span class="cmd fas fa-search-plus" id="btnShowSearch" title="Afficher les filtres de recherche" data-toggle="tooltip"></span>
+                        <span class="cmd fas fa-search-minus" id="btnHideSearch" title="Masquer les filtres de recherche" data-toggle="tooltip"></span>
                     </div>
                     <div class="d-flex justify-content-between me-3">
                         <div></div>
@@ -81,8 +81,14 @@
                     </div>
                 </div>
             </div>
-            <div class="filterPanel">
-
+            <div id="filterPanel">
+                <select id="usersSelect" class="form-control">
+                    <option value="-1">Tous les utilisateurs</option>
+                </select>
+                <input list="keywordsList" id="keywordsInput" class="form-control" placeholder="Recher par mots-clés">
+                <datalist id="keywordsList">
+                </datalist>
+                <span class="cmd fas fa-search" id="btnSearch" title="Rechercher" data-toggle="tooltip"></span>
             </div>
             <div class="scrollContainer">
                 <div id="imagesList">

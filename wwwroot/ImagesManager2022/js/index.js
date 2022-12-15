@@ -7,13 +7,20 @@ const btnProfile = $("#btnProfile");
 const btnLogout = $("#btnLogout");
 const lblUsername = $("#lblUsername");
 const connectedUserAvatar = $("#connectedUserAvatar");
+
 const newImageCmd = $("#newImageCmd");
 const btnSortDateAsc = $("#btnSortDateAsc");
 const btnSortDateDesc = $("#btnSortDateDesc");
 const btnShowSearch = $("#btnShowSearch");
 const btnHideSearch = $("#btnHideSearch");
 
-const qsBuilder = new QueryStringBuilder();
+const filterPanel = $("#filterPanel");
+const btnSearch = $("#btnSearch");
+const usersSelect = $("#usersSelect");
+const keywordsInput = $("#keywordsInput");
+const keywordsList = $("#keywordsList");
+
+const qsBuilder = new QueryStringBuilder(btnSearch, usersSelect, keywordsInput, keywordsList);
 
 function getAvatarURL(user){
     return !user || !user.AvatarURL ? "./images/No_Avatar.png": user.AvatarURL;
@@ -117,6 +124,7 @@ const imageDetailsDialog = new ImageDetailsDialog(
     $("#imageUserName") );
 
 
+// Ajout des évènements de classement par dates
 btnSortDateDesc.click((e) => {
     e.preventDefault();
     qsBuilder.sortDatesDesc = true;
@@ -134,3 +142,34 @@ btnSortDateAsc.click((e) => {
 });
 btnSortDateAsc.show();
 btnSortDateDesc.hide();
+
+
+
+// Ajout des évènements de filtres de recherche
+btnShowSearch.click((e) => {
+    e.preventDefault();
+    btnShowSearch.hide();
+    btnHideSearch.show();
+    filterPanel.show();
+})
+
+btnHideSearch.click((e) => {
+    e.preventDefault();
+    btnShowSearch.show();
+    btnHideSearch.hide();
+    filterPanel.hide();
+    qsBuilder.emptyParams();
+    getImagesList();
+})
+
+btnSearch.click((e) => {
+    e.preventDefault();
+    qsBuilder.getParams();
+    qsBuilder.keywordsManager.saveKeywords();
+    getImagesList();
+})
+
+btnShowSearch.show();
+btnHideSearch.hide();
+filterPanel.hide();
+qsBuilder.emptyParams();
