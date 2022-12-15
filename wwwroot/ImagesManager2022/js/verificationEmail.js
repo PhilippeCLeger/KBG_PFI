@@ -1,5 +1,5 @@
 class verificationDialog{
-    constructor (dlg, userId, codeV_input, AccountsAPI, userData){
+    constructor (dlg, codeV_input, AccountsAPI, userData){
         this.dlg = dlg;
         this.userId = userId;
         this.codeV_input = codeV_input;
@@ -7,6 +7,7 @@ class verificationDialog{
         this.__initialize_dialog();
         this.userData = userData;
         this.send = this.verfication();
+        verificationDialog.show();
     }
 
     __initialize_dialog(){
@@ -67,12 +68,7 @@ class verificationDialog{
     }
 
     empty(){
-        this.nameInput.val("");
-        this.emailInput.val("");
-        this.passwordInput.val("");
-        ImageUploader.resetImage(this.avatar.attr("id"));
-        this.avatarGUID.val("");
-        this.oldUser = null;
+        
     }
     
 }

@@ -68,24 +68,24 @@ const updateUser = (userId) => {
 logoutSuccess();
 
 const loginDialog = new LoginDialog(
-    $("#loginDlg"), $("#loginDlg #email_input"), 
-    $("#loginDlg #password_input"), $("#loginDlg #remember_input"), 
-    accountsAPI, userData, (loginData) => {
-        const onSuccess = (data) => {
-            loginSuccess(data);
-            getImagesList();
-        }
-        // console.log(userData);
-        accountsAPI.getByID(loginData.UserId, userData.Access_token, onSuccess, (err) => console.log(err));
-    });
+$("#loginDlg"), $("#loginDlg #email_input"), 
+$("#loginDlg #password_input"), $("#loginDlg #remember_input"), 
+accountsAPI, userData, (loginData) => {
+    const onSuccess = (data) => {
+        loginSuccess(data);
+        getImagesList();
+    }
+    // console.log(userData);
+    accountsAPI.getByID(loginData.UserId, userData.Access_token, onSuccess, (err) => console.log(err));
+});
 
-    const registerDialog = new RegisterDialog(
-        $("#registerDlg"),
-        $("#registerDlg #name_input"), 
-        $("#registerDlg #email_input"), 
-        $("#registerDlg #password_input"),
-        $("#avatar"), $("#r_avatar_GUID"),
-        accountsAPI, userData);
+const registerDialog = new RegisterDialog(
+    $("#registerDlg"),
+    $("#registerDlg #name_input"), 
+    $("#registerDlg #email_input"), 
+    $("#registerDlg #password_input"),
+    $("#avatar"), $("#r_avatar_GUID"),
+    accountsAPI, userData);
 
 
 btnLogin.click((e) => {
@@ -110,9 +110,19 @@ btnProfile.click((e) => {
     registerDialog.editProfile(userData.User);
 })
 
+const verificationDialog = new verificationDialog(
+$("#codeV_input"),$('#') , accountsAPI, userData, (loginData) => {
+    const onSuccess = (data) => {
+        loginSuccess(data);
+        getImagesList();
+    }
+    // console.log(userData);
+    accountsAPI.getByID(loginData.UserId, userData.Access_token, onSuccess, (err) => console.log(err));
+});
+
 btnVerification.click((e) => {
     e.preventDefault();
-    verificationDialog.show();
+    verificationDialog.verifEmail(userData.User.Id);
 })
 
 const imageDetailsDialog = new ImageDetailsDialog(
