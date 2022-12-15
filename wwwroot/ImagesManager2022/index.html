@@ -92,22 +92,22 @@
             <div>
                 <div id="loginDlg">
                     <form id="loginForm">
-                        <input type="text" name="" id="email_input" placeholder="Courriel">
-                        <input type="password" name="" id="password_input" placeholder="Mot de passe">
+                        <input type="text" name="" id="email_input" placeholder="Courriel@gmail.ca" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
+                        <input type="password" name="" id="password_input" placeholder="Mot de passe" pattern=".{6,}" required>
                         <input type="checkbox" name="remember_input" id="remember_input">
                         <label for="remember_input">Se souvenir de moi</label>
                     </form>
                 </div>
                 <div id="registerDlg">
                     <input type="hidden" id="r_avatar_GUID">
-                    <input type="text" name="" id="name_input" placeholder="Pseudonyme">
-                    <input type="text" name="" id="email_input" placeholder="Courriel">
-                    <input type="password" name="" id="password_input" placeholder="Mot de passe">
-                    <input type="password" name="" id="password2_input" placeholder="Confirmer le mot de passe">
+                    <input type="text" name="" id="name_input" placeholder="Pseudonyme" required>
+                    <input type="text" name="" id="email_input" placeholder="Courriel@gmail.ca" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
+                    <input type="password" name="" id="password_input" placeholder="Mot de passe" placeholder="Mot de passe" pattern=".{6,}" required>
+                    <input type="password" name="" id="password2_input" placeholder="Confirmer le mot de passe" placeholder="Mot de passe" pattern=".{6,}" required>
                     <br>
                     <label for="avatar">Image</label>
                         <div id='avatar' class='ImageUploader' defaultImage='images/No_Image.png'
-                            waitingImage='images/writing.gif'>
+                            waitingImage='images/writing.gif' required>
                         </div>
                 </div>
                 <div id="verificationDlg">
