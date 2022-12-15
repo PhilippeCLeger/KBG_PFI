@@ -62,7 +62,8 @@
                             data-toggle="tooltip"></span>
                         <span class="cmd fas fa-sort-amount-up" id="btnSortDateAsc" title="Classer en ordre chronologique" data-toggle="tooltip"></span>
                         <span class="cmd fas fa-sort-amount-down" id="btnSortDateDesc" title="Classer en ordre chronologique inverse" data-toggle="tooltip"></span>
-                        <span class="cmd fas fa-search-plus" id="btnSearch" title="Rechercher" data-toggle="tooltip"></span>
+                        <span class="cmd fas fa-search-plus" id="btnShowSearch" title="Rechercher" data-toggle="tooltip"></span>
+                        <span class="cmd fas fa-search-minus" id="btnHideSearch" title="Rechercher" data-toggle="tooltip"></span>
                     </div>
                     <div class="d-flex justify-content-between me-3">
                         <div></div>
@@ -75,12 +76,14 @@
                             <i class="cmd fas fa-sign-out-alt" id="btnLogout" title="Se déconnecter" data-toggle="tooltip"></i>
                             <i class="cmd fas fa-user-plus" id="btnSignup" title="S'inscrire" data-toggle="tooltip"></i>
                             <i class="cmd fas fa-address-card" id="btnProfile" title="Éditer mon profile" data-toggle="tooltip"></i>
-                        <i class="cmd fas fa-regular fa-envelope" id="btnVerification" title="Verifier votre courielle" data-toggle="tooltip"></i>
+                        <i class="cmd fas fa-regular fa-envelope" id="btnVerification" title="Vérifier votre courriel" data-toggle="tooltip"></i>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="filterPanel">
 
+            </div>
             <div class="scrollContainer">
                 <div id="imagesList">
                     <!-- filled programmatically-->
@@ -189,19 +192,20 @@
                 }
             }
 
+            // const qsBuilder = new QueryStringBuilder();
             function getImagesList(refresh = true) {
                 appendMode = !refresh;
                 function prepareQueryString() {
                     let queryString = "";
                     if (appendMode) {
-                        queryString = `?sort=Date,desc&offset=${Math.trunc(imagesCount / appendCount)}&limit=${appendCount}`;
+                        queryString = `offset=${Math.trunc(imagesCount / appendCount)}&limit=${appendCount}`;
                         imagesCount += appendCount;
                     } else {
-                        queryString = `?sort=Date,desc&offset=${0}&limit=${imagesCount}`;
+                        queryString = `offset=${0}&limit=${imagesCount}`;
                     }
-                    return queryString;
+                    return qsBuilder.getQueryString(queryString);
                 }
-                GET_ALL(refreshimagesList, error, prepareQueryString());
+                GET_ALL(userData.Access_token, refreshimagesList, error, prepareQueryString());
             }
 
 
@@ -306,7 +310,7 @@
             function editimage(e) {
                 holdCheckETag = true;
                 createMode = false;
-                GET_ID(e.target.getAttribute("imageid"), imageToForm, error);
+                GET_ID(e.target.getAttribute("imageid"),userData.Access_token, imageToForm, error);
                 holdCheckETag = true;
                 ImageUploader.imageRequired('image', false);
                 $("#imageDlg").dialog('option', 'title', "Modification d'image");
@@ -318,6 +322,7 @@
                 imageIdToDelete = e.target.getAttribute("imageid")
                 GET_ID(
                     imageIdToDelete,
+                    userData.Access_token,
                     image => {
                         $("#confirmationMessage").html("Voulez-vous vraiment effacer l'image <br><b>" + image.Title + "</b>?")
                     },
@@ -393,11 +398,11 @@
                             let image = imageFromForm();
                             if (image) {
                                 if (createMode) {
-                                    POST(image, getImagesList, error);
+                                    POST(image, userData.Access_token, getImagesList, error);
                                     $(".scrollContainer").scrollTop(0);
                                 }
                                 else
-                                    PUT(image, getImagesList, error);
+                                    PUT(image, userData.Access_token, getImagesList, error);
                                 resetimageForm();
                                 holdCheckETag = false;
                                 $(this).dialog("close");
@@ -428,7 +433,7 @@
                         click: function () {
                             holdCheckETag = false;
                             if (imageIdToDelete)
-                                DELETE(imageIdToDelete, getImagesList, error);
+                                DELETE(imageIdToDelete, userData.Access_token, getImagesList, error);
                             imageIdToDelete = 0;
                             $(this).dialog("close");
                         }
@@ -470,6 +475,7 @@
             }
         </script>
 
+        <script src="js/QueryStringBuilder.js"></script>
         <script src="js/UserData.js"></script>
         <script src="js/AccountsAPI.js"></script>
         <script src="js/login.js"></script>

@@ -10,9 +10,10 @@ const connectedUserAvatar = $("#connectedUserAvatar");
 const newImageCmd = $("#newImageCmd");
 const btnSortDateAsc = $("#btnSortDateAsc");
 const btnSortDateDesc = $("#btnSortDateDesc");
-const btnSearch = $("#btnSearch");
+const btnShowSearch = $("#btnShowSearch");
+const btnHideSearch = $("#btnHideSearch");
 
-
+const qsBuilder = new QueryStringBuilder();
 
 function getAvatarURL(user){
     return !user || !user.AvatarURL ? "./images/No_Avatar.png": user.AvatarURL;
@@ -125,9 +126,21 @@ const imageDetailsDialog = new ImageDetailsDialog(
     $("#imageUserAvatar"), 
     $("#imageUserName") );
 
-function buildQueryString(asc=true, keywords=[], userId=-1){
-    let list = [];
-    list.push(`sort=date${!asc ? ",desc" : ""}`);
-    
-    return list.join("&");
-}
+
+btnSortDateDesc.click((e) => {
+    e.preventDefault();
+    qsBuilder.sortDatesDesc = true;
+    btnSortDateAsc.show();
+    btnSortDateDesc.hide();
+    getImagesList();
+});
+
+btnSortDateAsc.click((e) => {
+    e.preventDefault();
+    qsBuilder.sortDatesDesc = false;
+    btnSortDateAsc.hide();
+    btnSortDateDesc.show();
+    getImagesList();
+});
+btnSortDateAsc.show();
+btnSortDateDesc.hide();
