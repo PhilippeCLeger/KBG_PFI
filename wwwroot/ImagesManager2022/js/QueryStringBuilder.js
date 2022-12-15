@@ -19,6 +19,9 @@ class QueryStringBuilder{
     }
 
     getUserIdParam(){
+        // on interroge this.usersSelect
+        // Si val est -1, on retour null
+        // sinon on retourne la string userid={la valeur de userID sélectionnée}
         return null;
     }
 
@@ -39,6 +42,10 @@ class QueryStringBuilder{
         if (previousQueryString.length > 0) params.push(previousQueryString);
         return `?${params.join("&")}`;
     }
+
+    // TODO:
+    // Ajouter une méthode fillUsers qui est appelée lorsqu'on rafraîchit la liste
+    // voir getImagesList dans index.html
     
     
     

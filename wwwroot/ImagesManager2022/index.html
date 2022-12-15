@@ -212,6 +212,7 @@
                     return qsBuilder.getQueryString(queryString);
                 }
                 GET_ALL(userData.Access_token, refreshimagesList, error, prepareQueryString());
+                // Ajouter un GET_ALL pour avoir seulement les images shared pour ajouter la liste des users à qsBuilder
             }
 
 
@@ -481,6 +482,7 @@
             }
         </script>
 
+        <script src="js/verificationEmail.js"></script>
         <script src="js/QueryStringBuilder.js"></script>
         <script src="js/UserData.js"></script>
         <script src="js/AccountsAPI.js"></script>

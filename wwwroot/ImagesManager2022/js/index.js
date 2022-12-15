@@ -110,7 +110,7 @@ btnProfile.click((e) => {
     registerDialog.editProfile(userData.User);
 })
 
-const verificationDialog = new verificationDialog(
+const verificationDialog = new VerificationDialog(
 $("#codeV_input"),$('#') , accountsAPI, userData, (loginData) => {
     const onSuccess = (data) => {
         loginSuccess(data);

@@ -1,4 +1,4 @@
-class verificationDialog{
+class VerificationDialog{
     constructor (dlg, codeV_input, AccountsAPI, userData){
         this.dlg = dlg;
         this.userId = userId;
