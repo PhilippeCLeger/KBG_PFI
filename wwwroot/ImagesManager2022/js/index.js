@@ -31,7 +31,7 @@ const aboutDialog = new AboutDialog(apropoDlg);
 
 btnApropo.click((e) =>{
     e.preventDefault();
-    aboutDialog;
+    aboutDialog.show();
 })
 
 const qsBuilder = new QueryStringBuilder(btnSearch, usersSelect, keywordsInput, keywordsList);
