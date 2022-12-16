@@ -67,7 +67,7 @@ class RegisterDialog{
             ]
         })
     }
-    setRegisterBtn(){
+    setModifyBtn(){
         this.dlg.dialog({
             buttons: [
                 {
@@ -93,6 +93,7 @@ class RegisterDialog{
     }
 
     register(){
+        
         let newUser = {};
         newUser.Name = this.nameInput.val();
         newUser.Email = this.emailInput.val();
@@ -106,7 +107,7 @@ class RegisterDialog{
             console.log("success:");
             console.log(data);
             //a reagrder
-            //updateUser(userData.User.Id);
+            updateUser(userData.User.Id);
             this.hide();
         };
 
@@ -128,6 +129,7 @@ class RegisterDialog{
     }
 
     modify(){
+        
         const newUser = {...this.oldUser};
         newUser.Name = this.nameInput.val();
         newUser.Email = this.emailInput.val();
@@ -168,12 +170,15 @@ class RegisterDialog{
     
     addUser(){
         this.empty;
+        this.setRegisterBtn();
         this.send = this.register;
+        this.dlg.dialog({Title: "S'inscrire"});
         this.show();
     }
     
     editProfile(user){
         this.empty();
+        this.setModifyBtn();
         this.send = this.modify;
         this.dlg.dialog({Title: "Modifier son profil"});
         this.oldUser = user;
