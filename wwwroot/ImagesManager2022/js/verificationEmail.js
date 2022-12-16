@@ -49,12 +49,14 @@ class VerificationDialog{
         const successRegisterCallback = (data) => {
             console.log("success: mail envoyez");
             console.log(data);
+            promptDialog.showPrompt("Courriel vérifié avec succès");
             this.hide();
         };
 
         const errorRegisterCallback = (error) => {
             console.log("error");
             console.log(error);
+            promptDialog.showPrompt("Une erreur est survenue", "Erreur");
         };
 
         this.API.verifyEmail(userId, code, successRegisterCallback, errorRegisterCallback);

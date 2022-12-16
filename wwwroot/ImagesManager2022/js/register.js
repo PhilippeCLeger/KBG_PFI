@@ -1,6 +1,7 @@
 class RegisterDialog{
-    constructor (dlg, nameInput,emailInput, passwordInput, password2Input, avatarInput, avatarGUID, AccountsAPI, userData){
+    constructor (dlg, form, nameInput,emailInput, passwordInput, password2Input, avatarInput, avatarGUID, AccountsAPI, userData){
         this.dlg = dlg;
+        this.form = form;
         this.nameInput = nameInput;
         this.emailInput = emailInput;
         this.passwordInput = passwordInput;
@@ -55,7 +56,7 @@ class RegisterDialog{
                     text: "Envoyer",
                     click: (e) => {
                         e.preventDefault();
-                        this.send();
+                        this.register();
                     }
                 },
                 {
@@ -74,7 +75,7 @@ class RegisterDialog{
                     text: "Envoyer",
                     click: (e) => {
                         e.preventDefault();
-                        this.send();
+                        this.modify();
                     }
                 },
                 {
@@ -93,27 +94,27 @@ class RegisterDialog{
     }
 
     register(){
-        
+        if(!this.form[0].checkValidity()) {
+            this.form[0].reportValidity();
+            return;
+        }
+        console.log("valid");
         let newUser = {};
         newUser.Name = this.nameInput.val();
         newUser.Email = this.emailInput.val();
         newUser.Password = this.passwordInput.val();
         let passwordV = this.password2Input.val();
-        // console.log(this.password2Input.val());
-        // passwordV = this.password2Input.val();
         console.log(passwordV);
         console.log(newUser.Password);
         const successRegisterCallback = (data) => {
-            console.log("success:");
-            console.log(data);
-            //a reagrder
-            updateUser(userData.User.Id);
+            promptDialog.showPrompt("Compte créé avec succès...", "Bienvenue");
             this.hide();
         };
 
-        const errorRegisterCallback = (error) => {
+        const errorRegisterCallback = (err) => {
             console.log("error");
-            console.log(error);
+            console.log(err);
+            // error(err);
         };
         newUser.ImageData = ImageUploader.getImageData(this.avatar.attr("id"));
         newUser.AvatarGUID = this.avatarGUID.val();
@@ -129,7 +130,10 @@ class RegisterDialog{
     }
 
     modify(){
-        
+        if(!this.form[0].checkValidity()) {
+            this.form[0].reportValidity();
+            return;
+        }
         const newUser = {...this.oldUser};
         newUser.Name = this.nameInput.val();
         newUser.Email = this.emailInput.val();
@@ -140,7 +144,7 @@ class RegisterDialog{
         const successModifyCallback = (data) => {
             console.log("success:");
             console.log(data);
-            updateUser(userData.User.Id);
+            updateUser(data.Id);
             this.hide();
         };
 
@@ -198,6 +202,9 @@ class RegisterDialog{
         const successModifyCallback = (data) => {
             console.log("success:");
             console.log(data);
+            promptDialog.showPrompt("Le compte a été supprimé avec succès", "Message");
+            this.hide();
+            logoutSuccess();
         };
 
         function deleteImages(images) {

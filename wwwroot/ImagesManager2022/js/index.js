@@ -22,6 +22,10 @@ const usersSelect = $("#usersSelect");
 const keywordsInput = $("#keywordsInput");
 const keywordsList = $("#keywordsList");
 
+const promptDlg = $("#promptDialog");
+const promptMessage = $("#promptMessage");
+const promptDialog = new PromptDialog(promptDlg, promptMessage);
+
 const qsBuilder = new QueryStringBuilder(btnSearch, usersSelect, keywordsInput, keywordsList);
 
 function getAvatarURL(user){
@@ -48,7 +52,8 @@ const UpdateDisplay = () => {
         btnRegister.hide();
         btnProfile.show();
         newImageCmd.show();
-        btnVerification.show();
+        if(userData.User.VerifyCode == "verified") btnVerification.hide();
+        else btnVerification.show();
     }
     getImagesList();
 }
@@ -84,7 +89,7 @@ accountsAPI, userData, (loginData) => {
 });
 
 const registerDialog = new RegisterDialog(
-    $("#registerDlg"),
+    $("#registerDlg"), $("#registerForm"),
     $("#registerDlg #name_input"), 
     $("#registerDlg #email_input"), 
     $("#registerDlg #password_input"),
@@ -100,7 +105,7 @@ btnLogin.click((e) => {
 
 btnRegister.click((e) => {
     e.preventDefault();
-    registerDialog.show();
+    registerDialog.addUser();
 });
 
 btnLogout.click((e) => {
