@@ -23,7 +23,7 @@
             <div class="headerPanel">
                 <div class="headerLayout">
                     <img src="images/camera.png" alt="" data-toggle="tooltip" class="favicon"
-                        title="Gestionnaire d'images">
+                        title="Gestionnaire d'images" id="apropo">
                    <div style="display:flex">
                         <span class="header outLinedText tbg-yellow">
                             P
@@ -76,7 +76,7 @@
                             <i class="cmd fas fa-sign-out-alt" id="btnLogout" title="Se déconnecter" data-toggle="tooltip"></i>
                             <i class="cmd fas fa-user-plus" id="btnSignup" title="S'inscrire" data-toggle="tooltip"></i>
                             <i class="cmd fas fa-address-card" id="btnProfile" title="Éditer mon profile" data-toggle="tooltip"></i>
-                        <i class="cmd fas fa-regular fa-envelope" id="btnVerification" title="Vérifier votre courriel" data-toggle="tooltip"></i>
+                            <i class="cmd fas fa-regular fa-envelope" id="btnVerification" title="Vérifier votre courriel" data-toggle="tooltip"></i>
                         </div>
                     </div>
                 </div>
@@ -84,6 +84,7 @@
             <div id="filterPanel">
                 <select id="usersSelect" class="form-control">
                     <option value="-1">Tous les utilisateurs</option>
+                    
                 </select>
                 <input list="keywordsList" id="keywordsInput" class="form-control" placeholder="Recher par mots-clés">
                 <datalist id="keywordsList">
@@ -105,11 +106,22 @@
                     </form>
                 </div>
                 <div id="registerDlg">
-                    <input type="hidden" id="r_avatar_GUID">
-                    <input type="text" name="" id="name_input" placeholder="Pseudonyme" required>
-                    <input type="text" name="" id="email_input" placeholder="Courriel@gmail.ca" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
-                    <input type="password" name="" id="password_input" placeholder="Mot de passe" placeholder="Mot de passe" pattern=".{6,}" required>
-                    <input type="password" name="" id="password2_input" placeholder="Confirmer le mot de passe" placeholder="Mot de passe" pattern=".{6,}" required>
+                    <form id="registerForm" stle="block">
+                        <input type="hidden" id="r_avatar_GUID">
+                        <label for="name_input">Pseudonyme</label><br>
+                        <input type="text" name="" id="name_input" required><br>
+
+                        <label for="email_input">Courriel</label><br>
+                        <input type="text" name="" id="email_input" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required><br>
+                        
+                        <label for="password">Mot de Passe</label><br>
+                        <input type="password" name="" id="password_input" pattern=".{6,}" required><br>
+                        
+                        <label for="password2_input">Confirmation</label><br>
+                        <input type="password" name="" id="password2_input" pattern=".{6,}" required><br>
+                        
+                        <p style="color: red;" id="alertPsw" hidden>This alert should be hidden.</p>
+                    </form>
                     <br>
                     <label for="avatar">Image</label>
                         <div id='avatar' class='ImageUploader' defaultImage='images/No_Image.png'
@@ -119,7 +131,8 @@
                 <div id="verificationDlg">
                     <form id="verificationForm">
                         <h5>Consulter votre boite de courriel pour connaitre votre code de verification et inscrivez-le ci-dessous</h5>
-                        <input type="text" name="" id="codeV_input" placeholder="Code de verification">
+                        <label for="codeV_input">Code de verification</label>
+                        <input type="text" class="form-control" id="codeV_input" placeholder="" required>
                     </form>
                 </div>
                 <div id="imageDlg">
@@ -137,7 +150,7 @@
                         
                         <label for="image">Image</label>
                         <div id='image' class='ImageUploader' defaultImage='images/No_Image.png'
-                            waitingImage='images/writing.gif'>
+                            waitingImage='images/writing.gif'required>
                         </div>
                         <div class="note">Cliquez-Déposez une image</div>
                         <label for="shared_input">Image partagée</label>
@@ -351,6 +364,7 @@
                 ImageUploader.resetImage('image');
                 $("#Shared_input").prop("checked", image.Shared);
             }
+            
             function imageFromForm() {
                 if ($("#imageForm")[0].checkValidity()) {
                     let image = {

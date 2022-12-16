@@ -57,12 +57,26 @@ class AccountsAPI{
     }
 
     verifyEmail(userId, code, successCallBack, errorCallBack){
-        const url = this.baseURL + `/accounts/verify?id=${userId}&code=${code}`
-        $ajax({
+        const url = this.baseURL + `/accounts/verify?id=${userId}&code=${code}`;
+        $.ajax({
             url: url,
             type: 'GET',
             contentType: 'application/json',
             success: (data) => successCallBack(data),
+            error: (jqXHR) => errorCallBack(jqXHR.status)
+        });
+    }
+    remove(userId, token, successCallBack, errorCallBack) {
+        const url = this.baseURL + `/accounts/remove/${userId}`
+        $.ajax({
+            url: url,
+            type: 'GET',
+            contentType:'application/json',
+            headers:{
+                authorization: token
+            },
+            // data: JSON.stringify({id: [userId]}),
+            success: (data) => { successCallBack(data) },
             error: (jqXHR) => errorCallBack(jqXHR.status)
         });
     }

@@ -21,6 +21,7 @@ function GET_ID(id, token, successCallBack, errorCallBack) {
     });
 }
 function GET_ALL(token, successCallBack, errorCallBack, queryString = null) {
+    console.log(queryString);
     let url = apiBaseURL + (queryString ? queryString : "");
     $.ajax({
         url: url,

@@ -19,10 +19,14 @@ class QueryStringBuilder{
     }
 
     getUserIdParam(){
+        let selectedUserId = this.usersSelect.val();
+
+        if(!!selectedUserId && selectedUserId != -1)
+            return `?usersSelect=${selectedUserId}`;
+        return null;
         // on interroge this.usersSelect
         // Si val est -1, on retour null
         // sinon on retourne la string userid={la valeur de userID sélectionnée}
-        return null;
     }
 
     getParams(){

@@ -5,8 +5,8 @@ class VerificationDialog{
         this.API = AccountsAPI;
         this.userData = userData;
         this.__initialize_dialog();
-        this.send = this.verfication();
-        verificationDialog.show();
+        
+        //verificationDialog.show();
     }
 
     __initialize_dialog(){
@@ -24,7 +24,9 @@ class VerificationDialog{
                     text: "Envoyer",
                     click: (e) => {
                         e.preventDefault();
-                        this.send();
+                        this.verfication();
+                        this.empty();
+                        this.hide();
                     }
                 },
                 {
@@ -40,9 +42,10 @@ class VerificationDialog{
 
 
     verfication(){
-        let userId = this.userId.val();
         let code = this.codeV_input.val();
-
+        let userId = this.userData.User.Id;
+        console.log(code);
+        console.log(userId);
         const successRegisterCallback = (data) => {
             console.log("success: mail envoyez");
             console.log(data);
@@ -65,9 +68,10 @@ class VerificationDialog{
     hide(){
         this.dlg.dialog('close');
     }
-
-    empty(){
-        
-    }
     
+    empty(){
+        this.codeV_input = "";
+    }
+
+
 }

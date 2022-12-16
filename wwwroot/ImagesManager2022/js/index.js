@@ -6,7 +6,9 @@ const btnRegister = $("#btnSignup");
 const btnProfile = $("#btnProfile");
 const btnLogout = $("#btnLogout");
 const lblUsername = $("#lblUsername");
+const btnVerification = $("#btnVerification");
 const connectedUserAvatar = $("#connectedUserAvatar");
+const btnApropo = $("#apropoBtn");
 
 const newImageCmd = $("#newImageCmd");
 const btnSortDateAsc = $("#btnSortDateAsc");
@@ -36,6 +38,7 @@ const UpdateDisplay = () => {
         btnRegister.show();
         btnProfile.hide();
         newImageCmd.hide();
+        btnVerification.hide();
     } else {
         lblUsername.text(userData.User.Name);
         connectedUserAvatar.css("background-image", `url('${getAvatarURL(userData.User)}')`);
@@ -45,6 +48,7 @@ const UpdateDisplay = () => {
         btnRegister.hide();
         btnProfile.show();
         newImageCmd.show();
+        btnVerification.show();
     }
     getImagesList();
 }
@@ -84,6 +88,7 @@ const registerDialog = new RegisterDialog(
     $("#registerDlg #name_input"), 
     $("#registerDlg #email_input"), 
     $("#registerDlg #password_input"),
+    $("#registerDlg #password2_input"),
     $("#avatar"), $("#r_avatar_GUID"),
     accountsAPI, userData
 );
@@ -109,8 +114,8 @@ btnProfile.click((e) => {
     e.preventDefault();
     registerDialog.editProfile(userData.User);
 })
-
-const verificationDialog = new VerificationDialog(   
+//verification
+const verificationDialog = new VerificationDialog( 
     $('#verificationDlg'),
     $("#codeV_input"),
     accountsAPI, 
@@ -119,7 +124,8 @@ const verificationDialog = new VerificationDialog(
 
 btnVerification.click((e) => {
     e.preventDefault();
-    verificationDialog.verifEmail(userData.User.Id);
+    console.log(userData.User.Id);
+    verificationDialog.show();
 })
 
 const imageDetailsDialog = new ImageDetailsDialog(
@@ -180,3 +186,8 @@ btnShowSearch.show();
 btnHideSearch.hide();
 filterPanel.hide();
 qsBuilder.emptyParams();
+
+btnApropo.click((e) =>{
+    e.preventDefault();
+    apropoDialog.show();
+})

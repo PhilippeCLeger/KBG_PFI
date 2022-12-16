@@ -37,6 +37,12 @@ class RegisterDialog{
                     click: () => {
                         this.hide();
                     }
+                },
+                {
+                    text: 'Desinscrire', 
+                    click: () =>{
+                        this.retirerCompte();
+                    }
                 }
             ]
         });
@@ -91,11 +97,16 @@ class RegisterDialog{
         newUser.Name = this.nameInput.val();
         newUser.Email = this.emailInput.val();
         newUser.Password = this.passwordInput.val();
-        password2 = this.password2Input.val();
+        let passwordV = this.password2Input.val();
+        // console.log(this.password2Input.val());
+        // passwordV = this.password2Input.val();
+        console.log(passwordV);
+        console.log(newUser.Password);
         const successRegisterCallback = (data) => {
             console.log("success:");
             console.log(data);
-            updateUser(userData.User.Id);
+            //a reagrder
+            //updateUser(userData.User.Id);
             this.hide();
         };
 
@@ -105,11 +116,13 @@ class RegisterDialog{
         };
         newUser.ImageData = ImageUploader.getImageData(this.avatar.attr("id"));
         newUser.AvatarGUID = this.avatarGUID.val();
-        if(newUser.Password = password2){
+        if(passwordV == newUser.Password){
             this.API.register(newUser, successRegisterCallback, errorRegisterCallback);
         }
         else{
-
+            let alert = document.getElementById("alertPsw")
+            alert.innerHTML = "Rentrer le meme mot de passe";
+            alert.removeAttribute("hidden");
         }
         
     }
@@ -120,7 +133,7 @@ class RegisterDialog{
         newUser.Email = this.emailInput.val();
         newUser.Password = this.passwordInput.val();
 
-        newUser.ImageData = ImageUploader.getImageData(this.avatar.attr("id"))
+        newUser.ImageData = ImageUploader.getImageData(this.avatar.attr("id"));
         newUser.AvatarGUID = this.avatarGUID.val();
         const successModifyCallback = (data) => {
             console.log("success:");
@@ -162,13 +175,44 @@ class RegisterDialog{
     editProfile(user){
         this.empty();
         this.send = this.modify;
-        this.dlg.dialog({Title: "Modifier son profil"})
+        this.dlg.dialog({Title: "Modifier son profil"});
         this.oldUser = user;
         this.nameInput.val(user.Name);
         this.emailInput.val(user.Email);
         this.passwordInput.val();
         this.show();
         ImageUploader.setImage(this.avatar.attr("id"), user.AvatarURL);
-        this.avatarGUID.val(user.AvatarGUID)
+        this.avatarGUID.val(user.AvatarGUID);
     }
+
+    retirerCompte(){
+        let userId = this.userData.User.Id;
+        let token = this.userData.Access_token;
+        console.log(userId);
+        console.log(token);
+        const successModifyCallback = (data) => {
+            console.log("success:");
+            console.log(data);
+        };
+
+        function deleteImages(images) {
+
+            for (let image of images) {
+                console.log(image.Id)
+                DELETE(image.Id, token, successModifyCallback, errorModifyCallback);
+            }
+        };
+        const errorModifyCallback = (error) => {
+            console.log("error");
+            console.log(error);
+        };
+        let queryString = `?UserId=${userId}`;
+
+        GET_ALL(token, deleteImages, errorModifyCallback, queryString);
+
+        
+        this.API.remove(userId, token, successModifyCallback, errorModifyCallback);
+        
+    }
+
 }
