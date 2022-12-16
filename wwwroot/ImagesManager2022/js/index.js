@@ -54,6 +54,7 @@ const UpdateDisplay = () => {
         newImageCmd.show();
         if(userData.User.VerifyCode == "verified") btnVerification.hide();
         else btnVerification.show();
+        console.log(userData.User);
     }
     getImagesList();
 }

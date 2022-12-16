@@ -50,6 +50,7 @@ class VerificationDialog{
             console.log("success: mail envoyez");
             console.log(data);
             promptDialog.showPrompt("Courriel vérifié avec succès");
+            updateUser(userId);
             this.hide();
         };
 

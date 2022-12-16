@@ -5,6 +5,8 @@ class QueryStringBuilder{
         this.usersSelect = usersSelect;
         this.keywordsManager = new KeywordsManager(keywordsInput, keywordsList);
         this.params = [];
+        this.users = [];
+        this.selectedUser = -1;
     }
     
     getSortParam(){
@@ -20,13 +22,10 @@ class QueryStringBuilder{
 
     getUserIdParam(){
         let selectedUserId = this.usersSelect.val();
-
+        this.selectedUser = selectedUserId;
         if(!!selectedUserId && selectedUserId != -1)
-            return `?usersSelect=${selectedUserId}`;
+            return `UserId=${selectedUserId}`;
         return null;
-        // on interroge this.usersSelect
-        // Si val est -1, on retour null
-        // sinon on retourne la string userid={la valeur de userID sélectionnée}
     }
 
     getParams(){
@@ -46,12 +45,24 @@ class QueryStringBuilder{
         if (previousQueryString.length > 0) params.push(previousQueryString);
         return `?${params.join("&")}`;
     }
-
-    // TODO:
-    // Ajouter une méthode fillUsers qui est appelée lorsqu'on rafraîchit la liste
-    // voir getImagesList dans index.html
     
+    fillUsers(images){
+        this.usersSelect.empty();
+        this.users = [];
+        this.addUser("Tous les utilisateurs", -1);
+        if(userData.User) this.addUser("Mes images", userData.User.Id);
+        for(let img of images){
+            this.addUser(img.User.Name, img.User.Id);
+        }
+        if(this.users.includes(this.selectedUser)) this.usersSelect.val(this.selectedUser);
+    }
     
+    addUser(name, userId){
+        if(!this.users.includes(userId)){
+            this.usersSelect.append($(`<option value="${userId}">${name}</option>`));
+            this.users.push(userId);
+        }
+    }
     
 }
 

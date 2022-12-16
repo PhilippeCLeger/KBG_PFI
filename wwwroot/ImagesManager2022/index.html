@@ -193,6 +193,16 @@
         <script src="js/imageUploader.js"></script>
         <script src="js/api.js"></script>
         <script src="js/date.js"></script>
+
+        <script src="js/verificationEmail.js"></script>
+        <script src="js/QueryStringBuilder.js"></script>
+        <script src="js/PromptDialog.js"></script>
+        <script src="js/UserData.js"></script>
+        <script src="js/AccountsAPI.js"></script>
+        <script src="js/login.js"></script>
+        <script src="js/register.js"></script>
+        <script src="js/ImageDetailsDialog.js"></script>
+        <script defer src="js/index.js"></script>
         
         <script defer>
             const periodicRefreshPeriod = 15;
@@ -233,8 +243,10 @@
                     }
                     return qsBuilder.getQueryString(queryString);
                 }
-                GET_ALL(userData.Access_token, refreshimagesList, error, prepareQueryString());
+                let accessToken = !userData ? "" : userData.Access_token
+                GET_ALL(accessToken, refreshimagesList, error, prepareQueryString());
                 // Ajouter un GET_ALL pour avoir seulement les images shared pour ajouter la liste des users à qsBuilder
+                GET_ALL("", (data) => qsBuilder.fillUsers(data), error);
             }
 
 
@@ -244,7 +256,7 @@
             }
 
             function refreshimagesList(images, ETag) {
-                const currentUser = userData.User;
+                const currentUser = userData ? userData.User : null;
                 function insertIntoImageList(image) {
                     const avatarURL = getAvatarURLwithImage(image, currentUser);
                     const imageContainer = $(` 
@@ -505,15 +517,7 @@
             }
         </script>
 
-        <script src="js/verificationEmail.js"></script>
-        <script src="js/QueryStringBuilder.js"></script>
-        <script src="js/PromptDialog.js"></script>
-        <script src="js/UserData.js"></script>
-        <script src="js/AccountsAPI.js"></script>
-        <script src="js/login.js"></script>
-        <script src="js/register.js"></script>
-        <script src="js/ImageDetailsDialog.js"></script>
-        <script defer src="js/index.js"></script>
+
     </body>
 
 </html>
