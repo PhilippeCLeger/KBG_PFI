@@ -22,40 +22,43 @@
         <div class="mainContainer">
             <div class="headerPanel">
                 <div class="headerLayout">
-                    <img src="images/camera.png" alt="" data-toggle="tooltip" class="favicon"
-                        title="Gestionnaire d'images" id="apropoBtn">
-                   <div style="display:flex">
-                        <span class="header outLinedText tbg-yellow">
-                            P
-                        </span>
-                        <span class="header outLinedText tbg-orange">
-                            I
-                        </span>
-                        <span class="header outLinedText tbg-red">
-                            C
-                        </span>
-                        <span class="header outLinedText tbg-pink ">
-                            T
-                        </span>
-                        <span class="header outLinedText tbg-black">
-                            -
-                        </span>
-                        <span class="header outLinedText tbg-purple">
-                            C
-                        </span>
-                        <span class="header outLinedText tbg-blue">
-                            L
-                        </span>
-                        <span class="header outLinedText tbg-green">
-                            O
-                        </span>
-                        <span class="header outLinedText tbg-grass">
-                            U
-                        </span>
-                        <span class="header outLinedText tbg-yellow">
-                            D
-                        </span>
+                    <div id="apropoBtn">
+                        <img src="images/camera.png" alt="" data-toggle="tooltip" class="favicon"
+                            title="Gestionnaire d'images">
                     </div>
+                        <div style="display:flex">
+                            <span class="header outLinedText tbg-yellow">
+                                P
+                            </span>
+                            <span class="header outLinedText tbg-orange">
+                                I
+                            </span>
+                            <span class="header outLinedText tbg-red">
+                                C
+                            </span>
+                            <span class="header outLinedText tbg-pink ">
+                                T
+                            </span>
+                            <span class="header outLinedText tbg-black">
+                                -
+                            </span>
+                            <span class="header outLinedText tbg-purple">
+                                C
+                            </span>
+                            <span class="header outLinedText tbg-blue">
+                                L
+                            </span>
+                            <span class="header outLinedText tbg-green">
+                                O
+                            </span>
+                            <span class="header outLinedText tbg-grass">
+                                U
+                            </span>
+                            <span class="header outLinedText tbg-yellow">
+                                D
+                            </span>
+                        
+                        </div>
                     <div></div>
                     <div class="d-flex gap-3">
                         <span class="cmd fa fa-plus-square" id="newImageCmd" title="Ajouter un image"
@@ -97,11 +100,10 @@
                 </div>
             </div>
             <div>
-                <div id="apropo">
-                    <h3>À propos</h3>
-                    <p>les noms des équipiers:<br>
-                    Marian Stici et Philip Leger.
-                    </p>
+                <div id="apropoDlg">
+                    <span>
+                    les noms des équipiers: Marian Stici et Philip Leger.
+                    </span>
                 </div>
                 <div id="loginDlg">
                     <form id="loginForm">
@@ -191,6 +193,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
         <script src="js/customValidation.js"></script>
         <script src="js/imageUploader.js"></script>
+        <script src="js/AboutDialog.js"></script>
         <script src="js/api.js"></script>
         <script src="js/date.js"></script>
 
