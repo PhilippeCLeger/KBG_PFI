@@ -26,6 +26,14 @@ const promptDlg = $("#promptDialog");
 const promptMessage = $("#promptMessage");
 const promptDialog = new PromptDialog(promptDlg, promptMessage);
 
+const apropoDlg = $("#apropoDlg");
+const aboutDialog = new AboutDialog(apropoDlg);
+
+btnApropo.click((e) =>{
+    e.preventDefault();
+    aboutDialog;
+})
+
 const qsBuilder = new QueryStringBuilder(btnSearch, usersSelect, keywordsInput, keywordsList);
 
 function getAvatarURL(user){
@@ -192,7 +200,4 @@ btnHideSearch.hide();
 filterPanel.hide();
 qsBuilder.emptyParams();
 
-btnApropo.click((e) =>{
-    e.preventDefault();
-    apropoDialog.show();
-})
+
